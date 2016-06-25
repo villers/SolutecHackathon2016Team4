@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Job;
+use Illuminate\Support\Facades\Response;
+
 
 
 use App\Http\Requests;

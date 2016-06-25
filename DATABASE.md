@@ -8,6 +8,8 @@ Pour chopper des données de façon plus complexe, penser à whereHas().
 
 Nom de la base de donnée : xetian
 
+*** Ajouter les champs timestamp() sur toutes les migrations ***
+
 ### users
 
 | Field          | Type          | Constraint  |
@@ -30,10 +32,9 @@ Nom de la base de donnée : xetian
 | graduation       | string        | 255 caractères max
 | lang             | string        | 50 caractères max
 | can_drive        | boolean       | 0 par défaut
-| **phone_number** | string        | 20 caractères maximum
-| **picture**      | string        | 255 caractères maximum
-
-Faut-il des champs supplémentaires ? Laravel ajoutera created_at et updated_at si vous utilisez timestamp() dans les migrations.
+| phone_number     | string        | 20 caractères maximum
+| picture          | string        | 255 caractères maximum
+| cv               | string        | 255 caractères maximum
 
 ### categories
 
@@ -87,4 +88,21 @@ Si d'autre champs, rajouter. S'inspirer de Pole-Emploi et DoYouBuzz pour complé
 | achievement_id | integer       | UNSIGNED car ne peut pas être négatif |
 | has_read       | boolean       | 0 par défaut |
 
-A compléter avec d'autres informations si besoin.
+# Les dernières nouvelles tables
+
+### votes
+
+| Field          | Type          | Constraint  |
+| ---------------|:-------------:| -----:|
+| id             | integer       | AUTO_INCREMENT, UNSIGNED car ne peut pas être négatif |
+| user_id        | integer       | UNSIGNED car ne peut pas être négatif |
+| note           | enum    | Enumérable de 1 à 5 |
+
+### purposes
+
+| Field          | Type          | Constraint  |
+| ---------------|:-------------:| -----:|
+| id             | integer       | AUTO_INCREMENT, UNSIGNED car ne peut pas être négatif |
+| from_user_id   | integer       | UNSIGNED car ne peut pas être négatif |
+| to_user_id     | integer       | UNSIGNED car ne peut pas être négatif |
+| message        | text          | 6000 caractères max |

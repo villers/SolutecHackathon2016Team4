@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Response;
+
 
 class CategoriesController extends Controller
 {

@@ -34,4 +34,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Job');
     }
+
+    public function achievements()
+    {
+        return $this->belongsToMany('App\Achievement')
+            ->withPivot('has_read')
+            ->withTimestamps();
+    }
 }

@@ -12,11 +12,11 @@ class AchievementsList extends Migration
      */
     public function up()
     {
-        Schema::create('achievements_list', function($table)
+        Schema::create('achievement_user', function($table)
         {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('achievements_id')->unsigned();
+            $table->integer('achievement_id')->unsigned();
             $table->boolean('has_read')->default(0);
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ class AchievementsList extends Migration
      */
     public function down()
     {
-        Schema::drop('achievements_list');
+        Schema::drop('achievement_user');
     }
 }
