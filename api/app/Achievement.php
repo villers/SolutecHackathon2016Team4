@@ -10,4 +10,13 @@ class Achievement extends Model
 
     // The attributes that should be hidden for arrays.
     protected $hidden = [];
+
+
+	public function user()
+	{
+		return $this->belongsToMany('App\User')
+			->withPivot('has_read')
+			->withTimestamps();
+
+	}
 }

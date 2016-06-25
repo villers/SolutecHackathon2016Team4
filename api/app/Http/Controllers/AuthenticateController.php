@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Response;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
+use App\Jobs\SendMail;
+
 
 class AuthenticateController extends Controller
 {
@@ -75,6 +77,8 @@ class AuthenticateController extends Controller
         ]);
 
         $message = 'Félicitation, votre inscription a bien été pris en compte !';
+
+        $this->dispatch(new SendMail($user));
 
         return Response::json(compact('message', 'user'), 200, [], JSON_NUMERIC_CHECK);
     }

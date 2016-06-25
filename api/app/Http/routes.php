@@ -27,4 +27,5 @@ Route::group(['middleware' => 'cors'], function () {
     Route::resource('notifications', 'NotificationsController');
     Route::resource('achievements', 'AchievementsController');
     Route::resource('users', 'UsersController');
+    Route::post('addAch','UsersController@add_achievements' );
 });
