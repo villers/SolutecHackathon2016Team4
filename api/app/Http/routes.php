@@ -25,12 +25,15 @@ Route::group(['middleware' => 'cors'], function()
 
 
 
+
     // Register & validate Routes
 
     Route::post('register', 'RegisterController@register');
     Route::get('active_account/{token}', 'RegisterController@active_account');
 
-
+    Route::resource('categories', 'CategoriesController');
+    Route::resource('jobs', 'JobsController');
+    Route::resource('notifications', 'NotificationsController');
+    Route::resource('achievements', 'AchievementsController');
 });
-
 
