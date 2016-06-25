@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::group(['middleware' => 'cors'], function () {
     // Country Routes
     Route::get('country', function () {
