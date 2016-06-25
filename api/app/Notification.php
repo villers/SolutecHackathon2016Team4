@@ -16,8 +16,8 @@ class Notification extends Model
 
 	protected $hidden = [];
 
-	public function user()
+	public function users()
 	{
-		return $this->belongsTo('App\Job');
+		return $this->belongsTo('App\User');
 	}
 }
