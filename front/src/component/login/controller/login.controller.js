@@ -1,11 +1,13 @@
 const SERVICES = new Map();
 
 class Login {
-  constructor($state, $auth, $mdToast) {
+  constructor($state, $auth, store, $mdToast, $rootScope) {
     SERVICES
       .set('$state', $state)
       .set('$auth', $auth)
-      .set('$mdToast', $mdToast);
+      .set('store', store)
+      .set('$mdToast', $mdToast)
+      .set('$rootScope', $rootScope);
 
     this.error = null;
 
@@ -16,13 +18,16 @@ class Login {
   }
 
   login() {
-    SERVICES.get('$auth').login(this.credentials).then(() => {
+    SERVICES.get('$auth').login(this.credentials).then((response) => {
       const toast = SERVICES.get('$mdToast').simple()
         .textContent('Connecté')
         .highlightAction(true)
         .highlightClass('md-accent')
         .hideDelay(3000)
-        .position('top right');
+        .position('bottom right');
+
+      SERVICES.get('$rootScope').currentUser = response.data.user;
+      SERVICES.get('store').set('currentUser', response.data.user);
 
       SERVICES.get('$mdToast').show(toast);
       SERVICES.get('$state').go('dashboard', {});
@@ -32,6 +37,6 @@ class Login {
   }
 }
 
-Login.$inject = ['$state', '$auth', '$mdToast'];
+Login.$inject = ['$state', '$auth', 'store', '$mdToast', '$rootScope'];
 
 export default Login;

@@ -31,7 +31,7 @@ angular
     components,
     directives,
   ])
-  .config(($stateProvider, $locationProvider, $urlRouterProvider, $authProvider) => {
+  .config(($stateProvider, $locationProvider, $urlRouterProvider, $authProvider, storeProvider) => {
     $locationProvider.html5Mode(true);
 
     // Redirect to default state if any other states
@@ -47,6 +47,14 @@ angular
     $authProvider.baseUrl = CONFIG.API_URL;
     $authProvider.loginUrl = '/authenticate/login';
     $authProvider.signupUrl = '/authenticate/register';
+
+    // Configure default SessionStorage
+    storeProvider.setStore('sessionStorage');
+  })
+  .run(($auth, $rootScope, store) => {
+    if ($auth.isAuthenticated()) {
+      $rootScope.currentUser = store.get('currentUser');
+    }
   });
 
 export default moduleName;
