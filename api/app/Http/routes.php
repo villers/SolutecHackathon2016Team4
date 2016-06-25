@@ -28,7 +28,6 @@ Route::group(['middleware' => 'cors'], function()
     Route::post('register', 'RegisterController@register');
     Route::get('active_account/{token}', 'RegisterController@active_account');
 
-
     // CRUD Routes
 
     Route::resource('categories', 'CategoriesController');

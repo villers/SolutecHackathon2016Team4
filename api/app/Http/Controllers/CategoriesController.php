@@ -16,18 +16,7 @@ class CategoriesController extends Controller
     public function index()
     {
         $category = category::all();
-
         return response()->json(compact('category'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
     }
 
     /**
@@ -40,12 +29,9 @@ class CategoriesController extends Controller
     {
         $category = Category::create([
             "name" => $request["name"]
-        ]);
-
-
+            ]);
         $status = true;
         $message = 'Catégories crée';
-
         return response()->json(compact('status', 'message', 'category'));
     }
 
@@ -57,18 +43,8 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $category = Category::findOrFail($id);
+        return response()->json(compact('category'));
     }
 
     /**
@@ -80,7 +56,10 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->name = $request['name'];
+        $category->save();
+        return response()->json(['status' => 'true', 'message' => 'Category édité !']);
     }
 
     /**
@@ -91,10 +70,8 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
-
+        $category = Category::findOrFail($id);
         $category->delete();
-
         return response()->json(['status' => 'true', 'message' => 'Catégorie supprimé !']);
     }
 }
