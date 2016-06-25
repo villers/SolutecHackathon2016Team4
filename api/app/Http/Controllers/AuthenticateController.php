@@ -13,6 +13,8 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthenticateController extends Controller
 {
+    const PUBLIC_REDIRECTION = 'http://localhost:3002';
+
     public function __construct()
     {
         // Apply the jwt.auth middleware to all methods in this controller
@@ -92,13 +94,11 @@ class AuthenticateController extends Controller
     {
         $user = User::where('token_active', $data)->firstOrFail();
 
-        $user->active = 1;
+        $user->is_active = 1;
         $user->token_active = 0;
         $user->save();
 
-        $message = 'Compte activé, vous pouvez vous connecter !';
-
-        return Response::json(compact('message'), 200, [], JSON_NUMERIC_CHECK);
+        return redirect(self::PUBLIC_REDIRECTION);
     }
 
     /**
