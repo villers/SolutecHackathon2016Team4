@@ -15,11 +15,6 @@ config.plugins = config.plugins.concat([
     mangle: false,
   }),
   new webpack.optimize.OccurenceOrderPlugin(),
-  new webpack.ProvidePlugin({
-    'window.$': 'jquery',
-    'window.jQuery': 'jquery',
-    'Hammer': 'hammerjs/hammer'
-  }),
   new HtmlWebpackPlugin(config.html),
 ]);
 
