@@ -20,3 +20,11 @@ Route::group(['prefix' => 'api'], function()
     Route::resource('authenticate', 'AuthenticateController');
     Route::post('authenticate', 'AuthenticateController@authenticate');
 });
+
+Route::resource('categories', 'CategoriesController');
+
+Route::resource('jobs', 'JobsController');
+
+Route::resource('notifications', 'NotificationsController');
+
+Route::resource('achievements', 'AchievementsController');
