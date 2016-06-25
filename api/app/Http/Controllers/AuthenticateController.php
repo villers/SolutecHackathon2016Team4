@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
-
 
 class AuthenticateController extends Controller
 {
@@ -17,58 +16,84 @@ class AuthenticateController extends Controller
         // Apply the jwt.auth middleware to all methods in this controller
         // except for the authenticate method. We don't want to prevent
         // the user from retrieving their token if they don't already have it
-        $this->middleware('jwt.auth', ['except' => ['authenticate']]);
-    }
-
-    public function index()
-    {
-        // Retrieve all the users in the database and return them
-        $users = User::all();
-        return $users;
+        $this->middleware('jwt.auth', ['except' => ['postAuthenticate', 'postRegister', 'getActiveAccount']]);
     }
 
     /**
      * Return a JWT
-     **/
-    public function authenticate(Request $request)
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function postAuthenticate(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-
         try {
-            // verify the credentials / create a token for the user
-            if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['status' => false, 'error' => 'Ce compte n\'existe pas ou les informations sont erronées'], 401);
+            $credentials = $request->only('email', 'password');
+            $token = JWTAuth::attempt($credentials);
+
+            // Verify the credentials / create a token for the user
+            if (!$token) {
+                throw new JWTException('Ce compte n\'existe pas ou les informations sont erronées', 401);
             }
+
+            $user = User::where('email', $credentials['email'])->firstOrFail();
+
+            if (!$user['attributes']['is_active']) {
+                throw new JWTException('Ce compte n\'est pas activé.', 401);
+            }
+
+            return Response::json(compact('token', 'user'), 200, [], JSON_NUMERIC_CHECK);
 
         } catch (JWTException $e) {
             // when wrong
-            return response()->json(['error' => 'could_not_create_token'], 500);
+            return Response::json(['error' => $e->getMessage()], $e->getStatusCode(), [], JSON_NUMERIC_CHECK);
         }
-
-        $user = User::where('email', $credentials['email'])->first();
-
-        if(!$user['attributes']['is_active'])
-        {
-            $status = false;
-            $message = "Veuillez activer votre compte";
-            return response()->json(compact('status', 'message'));
-        }
-
-        // if no errors return a JWT
-        $status = true;
-
-        return response()->json(compact('status', 'token', 'user'));
     }
 
-    public function active_account($data){
+    /**
+     * Register user account
+     * @param Requests\CreateUserRequest $request
+     * @return mixed
+     */
+    public function postRegister(Requests\CreateUserRequest $request)
+    {
+        $confirmation_code = str_random(30);
 
-        $user = User::where('token_active', $data)->first();
+        $user = User::create([
+            'first_name'     => $request['first_name'],
+            'last_name'      => $request['last_name'],
+            'login'          => $request['login'],
+            'email'          => $request['email'],
+            'password'       => \Hash::make($request['password']),
+            'country'        => $request['country'],
+            'city'           => $request['city'],
+            'postal_code'    => $request['postal_code'],
+            'address_number' => $request['address_number'],
+            'address'        => $request['address'],
+            'type'           => $request['type'],
+            'is_active'      => 0,
+            'token_active'   => $confirmation_code,
+        ]);
+
+        $message = 'Félicitation, votre inscription a bien été pris en compte !';
+
+        return Response::json(compact('message', 'user'), 200, [], JSON_NUMERIC_CHECK);
+    }
+
+    /**
+     * Consume token
+     * @param {String} $data
+     * @return mixed
+     */
+    public function getActiveAccount($data)
+    {
+        $user = User::where('token_active', $data)->firstOrFail();
 
         $user->active = 1;
         $user->token_active = 0;
         $user->save();
 
-        return response()->json(['status' => true, 'message' => 'Compte activé, vous pouvez vous connecter !']);
+        $message = 'Compte activé, vous pouvez vous connecter !';
 
+        return Response::json(compact('message'), 200, [], JSON_NUMERIC_CHECK);
     }
 }

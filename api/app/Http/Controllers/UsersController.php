@@ -19,6 +19,12 @@ class UsersController extends Controller
         $user = User::all();
 
         return response()->json(compact('user'));
-
     }
+
+    /**
+     * TODO : UPDATE
+     * TODO : SHOW
+     * TODO : DELETE
+     * We don't need store, we have RegisterController !!!
+     */
 }

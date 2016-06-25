@@ -16,75 +16,53 @@ class AchievementsController extends Controller
      */
     public function index()
     {
-        $achievement = Achievement::all();
+        $achievements = Achievement::all();
 
-        return response()->json(compact('achievement'));
-
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
+        return Response::json(compact('achievements'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Requests\CreateAchievementRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(Requests\CreateAchievementRequest $request)
     {
         $achievement = Achievement::create([
             "message" => $request["message"],
-            "points" => $request["points"],
-            "icon" => $request["icon"]
+            "points"  => $request["points"],
+            "icon"    => $request["icon"],
         ]);
 
+        $message = 'L\'haut-fait a bien été enregistré !';
 
-        $status = true;
-        $message = 'Haut-fait crée !';
-
-        return response()->json(compact('status', 'message', 'achievement'));
+        return Response::json(compact('message', 'achievement'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
-    }
+        $achievement = Achievement::findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Response::json(compact('achievement'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param Requests\CreateAchievementRequest $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Requests\CreateAchievementRequest $request, $id)
     {
-        $achievement = Achievement::find($id);
+        $achievement = Achievement::findOrFail($id);
 
         $achievement->message = $request['message'];
         $achievement->points = $request['points'];
@@ -92,23 +70,25 @@ class AchievementsController extends Controller
 
         $achievement->save();
 
-        return response()->json(['status' => 'true', 'message' => 'Haut-fait édité !']);
+        $message = 'L\'haut-fait a bien été édité !';
 
+        return Response::json(compact('message', 'achievement'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $achievement = Achievement::find($id);
+        $achievement = Achievement::findOrFail($id);
 
         $achievement->delete();
 
-        return response()->json(['status' => 'true', 'message' => 'Haut-fait supprimé !']);
+        $message = 'L\'haut-fait a bien été supprimé !';
 
+        return Response::json(compact('message', 'achievement'), 200, [], JSON_NUMERIC_CHECK);
     }
 }

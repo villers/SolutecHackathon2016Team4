@@ -15,40 +15,27 @@ class NotificationsController extends Controller
      */
     public function index()
     {
-        $notification = Notification::all();
+        $notifications = Notification::all();
 
-        return response()->json(compact('notification'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return Response::json(compact('notifications'), [], JSON_NUMERIC_CHECK);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Requests\CreateNotificationRequest $request)
     {
         $notification = Notification::create([
-            "user_id" => $request['user_id'],
-            "has_read" => $request['has_read'],
-            "message" => $request['message'],
+            'user_id'  => $request['user_id'],
+            'has_read' => $request['has_read'],
+            'message'  => $request['message'],
         ]);
 
+        $message = 'La notification a bien été enregistré !';
 
-        $status = true;
-        $message = 'Notification crée !';
-
-        return response()->json(compact('status', 'message', 'notification'));
+        return Response::json(compact('message', 'notification'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
@@ -59,18 +46,9 @@ class NotificationsController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $notification = Notification::findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Response::json(compact('notification'), [], JSON_NUMERIC_CHECK);
     }
 
     /**
@@ -82,7 +60,15 @@ class NotificationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $notification = Notification::findOrFail($id);
+
+        $notification->user_id = $request['user_id'];
+        $notification->has_read = $request['has_read'];
+        $notification->message = $request['message'];
+
+        $message = 'La catégorie a bien été édité !';
+
+        return Response::json(compact('message', 'notification'), [], JSON_NUMERIC_CHECK);
     }
 
     /**

@@ -15,86 +15,73 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $category = category::all();
+        $categories = Category::all();
 
-        return response()->json(compact('category'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
+        return Response::json(compact('categories'), [], JSON_NUMERIC_CHECK);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Requests\CreateCategoryRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(Requests\CreateCategoryRequest $request)
     {
-        $category = Category::create([
-            "name" => $request["name"]
-        ]);
+        $category = Category::create(['name' => $request['name']]);
 
+        $message = 'La catégorie a bien été enregistré !';
 
-        $status = true;
-        $message = 'Catégories crée';
-
-        return response()->json(compact('status', 'message', 'category'));
+        return Response::json(compact('message', 'category'), [], JSON_NUMERIC_CHECK);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
-    }
+        $category = Category::findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Response::json(compact('category'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        $category->message = $request['name'];
+
+        $category->save();
+
+        $message = 'La catégorie a bien été édité !';
+
+        return Response::json(compact('message', 'category'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
 
         $category->delete();
 
-        return response()->json(['status' => 'true', 'message' => 'Catégorie supprimé !']);
+        $message = 'La catégorie a bien été supprimé !';
+
+        return Response::json(compact('message', 'category'), 200, [], JSON_NUMERIC_CHECK);
     }
 }
