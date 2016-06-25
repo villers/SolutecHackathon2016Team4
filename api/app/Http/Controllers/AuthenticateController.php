@@ -27,27 +27,36 @@ class AuthenticateController extends Controller
         return $users;
     }
 
-
     /**
      * Return a JWT
      **/
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
+
         try {
             // verify the credentials / create a token for the user
             if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['status'=> false, 'error' => 'Ce compte n\'existe pas ou les informations sont erronées'], 401);
+                return response()->json(['status' => false, 'error' => 'Ce compte n\'existe pas ou les informations sont erronées'], 401);
             }
+
         } catch (JWTException $e) {
             // when wrong
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
+
+        $user = User::where('email', $credentials['email'])->first();
+
+        if(!$user['attributes']['is_active'])
+        {
+            $status = false;
+            $message = "Veuillez activer votre compte";
+            return response()->json(compact('status', 'message'));
+        }
+
         // if no errors return a JWT
         $status = true;
 
-
-        $user = User::where('email', $credentials['email'])->first();
         return response()->json(compact('status', 'token', 'user'));
     }
 
