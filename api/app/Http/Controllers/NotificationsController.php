@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Notification;
 
 use App\Http\Requests;
 
@@ -15,7 +16,9 @@ class NotificationsController extends Controller
      */
     public function index()
     {
-        //
+        $notification = Notification::all();
+
+        return response()->json(compact('notification'));
     }
 
     /**
@@ -34,9 +37,19 @@ class NotificationsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\CreateNotificationRequest $request)
     {
-        //
+        $notification = Notification::create([
+            "user_id" => $request['user_id'],
+            "has_read" => $request['has_read'],
+            "message" => $request['message'],
+        ]);
+
+
+        $status = true;
+        $message = 'Notification crée !';
+
+        return response()->json(compact('status', 'message', 'notification'));
     }
 
     /**
@@ -81,6 +94,10 @@ class NotificationsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $notification = Notification::find($id);
+
+        $notification->delete();
+
+        return response()->json(['status' => 'true', 'message' => 'Notification supprimé !']);
     }
 }
