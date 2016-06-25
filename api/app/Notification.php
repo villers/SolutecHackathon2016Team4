@@ -8,11 +8,16 @@ class Notification extends Model
 {
      // The attributes that are mass assignable.
 
-    protected $fillable = [
-    'user_id', 'has_read', 'message',
-    ];
+	protected $fillable = [
+	'user_id', 'has_read', 'message',
+	];
 
      // The attributes that should be hidden for arrays.
-    
-    protected $hidden = [];
+
+	protected $hidden = [];
+
+	public function user()
+	{
+		return $this->belongsTo('App\Job');
+	}
 }

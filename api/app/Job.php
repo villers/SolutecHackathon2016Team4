@@ -16,4 +16,10 @@ class Job extends Model
     
     protected $hidden = [];
 
+
+	public function category()
+	{
+		return $this->hasOne('App\Categories');
+	}
+
 }
