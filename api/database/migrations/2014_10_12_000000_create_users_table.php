@@ -24,15 +24,13 @@ class CreateUsersTable extends Migration
             $table->string('password', 255);
             $table->string('country', 70);
             $table->string('city', 70);
-            $table->integer('postal_code', 5)->unsigned();
+             $table->string('postal_code', 5);
             $table->integer('address_number')->unsigned();
             $table->string('address', 70);
             $table->boolean('is_active')->default(0);
             $table->string('token_active');
             $table->timestamps();
         });
-
-        DB::statement('ALTER TABLE users ADD postal_code INT UNSIGNED ZEROFILL NOT NULL');
     }
 
     /**

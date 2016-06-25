@@ -19,7 +19,7 @@ class Jobs extends Migration
             $table->integer('category_id')->unsigned();
             $table->string('country', 70);
             $table->string('city', 70);
-            $table->integer('postal_code', 5)->unsigned();
+            $table->string('postal_code', 5);
             $table->longText('entreprise_desc',6000);
             $table->longText('message',6000);
             $table->string('lang', 50); 
@@ -27,7 +27,6 @@ class Jobs extends Migration
             $table->float('salary'); 
             $table->timestamps();
         });
-        DB::statement('ALTER TABLE jobs ADD postal_code INT UNSIGNED ZEROFILL NOT NULL');
     }
 
     /**
