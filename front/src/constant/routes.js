@@ -41,8 +41,12 @@ export const ROUTES = {
   logout: {
     name: 'logout',
     url: '/logout',
-    controller: ($auth, $state) => {
+    controller: ($auth, $state, $rootScope, store) => {
       $auth.logout();
+
+      delete $rootScope.currentUser;
+      store.remove('currentUser');
+
       $state.go('login');
     },
     resolve: { authenticator },
