@@ -11,25 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-});
 
+Route::group(['middleware' => 'cors'], function () {
+    // Country Routes
+    Route::get('country', function () {
+        return Response::json(App\Country::all(), 200, [], JSON_NUMERIC_CHECK);
+    });
 
-Route::group(['middleware' => 'cors'], function()
-{
+    // Auth Routes
+    Route::controller('authenticate', 'AuthenticateController');
 
-    // Login Routes
-
-    Route::resource('authenticate', 'AuthenticateController');
-    Route::post('authenticate', 'AuthenticateController@authenticate');
-
-    Route::get('home', 'UploadController@index');
-    Route::post('upload','UploadController@upload');
-
-    // Register & validate Routes
-
-    Route::post('register', 'RegisterController@register');
-    Route::get('active_account/{token}', 'RegisterController@active_account');
+    // Upload Routes
+    Route::post('upload', 'UploadController@upload');
 
     // CRUD Routes
 
@@ -38,7 +31,6 @@ Route::group(['middleware' => 'cors'], function()
     Route::resource('notifications', 'NotificationsController');
     Route::resource('achievements', 'AchievementsController');
     Route::resource('users', 'UsersController');
-
 
 });
 
