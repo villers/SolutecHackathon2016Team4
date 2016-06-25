@@ -3,10 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Illuminate\Support\Facades\Input;
 
-class CreateAchievementRequest extends Request
+class CreateJobRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +24,16 @@ class CreateAchievementRequest extends Request
     public function rules()
     {
         return [
-            "message" => "required|max:50",
-            "points" => "required",
-            "icon" => "required|max:25",
+            "user_id" => "required",
+            "category_id" => "required",
+            "country" => "required|max:70",
+            "city" => "required|max:70",
+            "postal_code" => "required|max:70",
+            "entreprise_desc" => "required|max:6000",
+            "message" => "required|max:6000",
+            "lang" => "required|max:50",
+            "graduation" => "required|max:50",
+            "salary" => "required",
         ];
     }
 

@@ -51,7 +51,7 @@ class AuthenticateController extends Controller
         $user->token_active = 0;
         $user->save();
 
-        return response()->json(compact(['status' => true, 'message' => 'Compte activé, vous pouvez vous connecter !']));
+        return response()->json(['status' => true, 'message' => 'Compte activé, vous pouvez vous connecter !']);
 
     }
 }

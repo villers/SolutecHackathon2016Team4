@@ -27,9 +27,6 @@ class CreateUserRequest extends Request
      */
     public function rules()
     {
-
-
-
         return [
             "login" => "unique:users,login|required|max:15",
             "email" => "unique:users,email|required|max:255",
