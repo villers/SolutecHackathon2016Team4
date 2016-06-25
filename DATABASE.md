@@ -96,7 +96,7 @@ Si d'autre champs, rajouter. S'inspirer de Pole-Emploi et DoYouBuzz pour complé
 | ---------------|:-------------:| -----:|
 | id             | integer       | AUTO_INCREMENT, UNSIGNED car ne peut pas être négatif |
 | user_id        | integer       | UNSIGNED car ne peut pas être négatif |
-| note           | enumerable    | ENUMERABLE de 1 à 5 |
+| note           | enum    | Enumérable de 1 à 5 |
 
 ### purposes
 
