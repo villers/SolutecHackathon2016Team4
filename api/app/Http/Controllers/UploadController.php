@@ -5,33 +5,36 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Notification;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Input;
+use App\User;
 
 class UploadController extends Controller 
 {
-
 	public function index()
 	{
 		return view('upload');
 	}
 
-	// public function upload(Request $request)
-	// {
-	// 	$destinationPath = 'avatar';
+	public function upload()
+	{
+		$id = 2;
 
-	// 	if(!file_exists($destinationPath."/".$id))
-	// 	{
-	// 		mkdir($destinationPath."/".$id, 0777);
-	// 	}
+		$destinationPath = 'avatar/';
 
-	// 	if($request->hasFile('file'))
-	// 	{
-	// 		$images = $request->file('file');
-	// 		$destinationPath = $destinationPath."/".$id;
-	// 		$mime = $images->getMimeType();
-	// 		$fileName = $id.$images->getClientOriginalName();
-	// 		$images->move($destinationPath, $fileName);
-	// 	}
-	// }
+		$base64 = Input::get('base64');
+
+		$imageData = base64_decode($base64);
+		$source = imagecreatefromstring($imageData);
+		$rotate = imagerotate($source, 0, 0);
+		$imageSave = imagejpeg($rotate, $destinationPath.$id.'.jpg',100);
+		imagedestroy($source);
+
+		$user = User::findOrFail($id);
+
+		$user->picture = $destinationPath.$id.'.jpg';
+
+		$user->save();
+	}
 }
 
 ?>
