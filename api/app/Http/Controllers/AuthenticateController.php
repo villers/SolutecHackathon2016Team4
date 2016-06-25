@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
@@ -17,11 +18,11 @@ class AuthenticateController extends Controller
         // Apply the jwt.auth middleware to all methods in this controller
         // except for the authenticate method. We don't want to prevent
         // the user from retrieving their token if they don't already have it
-        $this->middleware('jwt.auth', ['except' => ['postLogin', 'postRegister', 'getActiveAccount']]);
+        $this->middleware('jwt.auth', ['except' => ['postLogin', 'postRegister', 'getActive']]);
     }
 
     /**
-     * Return a JWT
+     * Return a JSON Web Token for authentication
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -45,7 +46,7 @@ class AuthenticateController extends Controller
             return Response::json(compact('token', 'user'), 200, [], JSON_NUMERIC_CHECK);
 
         } catch (JWTException $e) {
-            // when wrong
+            // When wrong
             return Response::json(['error' => $e->getMessage()], $e->getStatusCode(), [], JSON_NUMERIC_CHECK);
         }
     }
@@ -87,7 +88,7 @@ class AuthenticateController extends Controller
      * @param {String} $data
      * @return mixed
      */
-    public function getActiveAccount($data)
+    public function getActive($data)
     {
         $user = User::where('token_active', $data)->firstOrFail();
 
@@ -98,5 +99,14 @@ class AuthenticateController extends Controller
         $message = 'Compte activé, vous pouvez vous connecter !';
 
         return Response::json(compact('message'), 200, [], JSON_NUMERIC_CHECK);
+    }
+
+    /**
+     * Get authenticate user information
+     * @return mixed
+     */
+    public function getMe()
+    {
+        return Response::json(Auth::user(), 200, [], JSON_NUMERIC_CHECK);
     }
 }

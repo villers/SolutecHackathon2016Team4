@@ -4,13 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-<<<<<<< HEAD
 use App\Achievement;
 use Illuminate\Support\Facades\Response;
-
-
-=======
->>>>>>> ba58562d60cb4f735bf52b5bd0e91750502d802b
 use App\Http\Requests;
 
 class UsersController extends Controller
@@ -27,24 +22,22 @@ class UsersController extends Controller
         return response()->json(compact('user'));
     }
 
-<<<<<<< HEAD
-
-    public function add_achievements(Request $request) {
-
-
+    /**
+     * Store User Achievement
+     * @param Request $request
+     */
+    public function storeAchievement(Request $request)
+    {
         $user = User::findOrFail($request['user_id']);
-        $user->achievements()->attach($request['achievements_id']);
-        dd($request['achievements_id']);
 
+        $user->achievements()->attach($request['achievements_id']);
     }
 
     /**
-     * TODO : UPDATE
-     * TODO : SHOW
-     * TODO : DELETE
-     * We don't need store, we have RegisterController !!!
+     * Show single User
+     * @param $id
+     * @return mixed
      */
-=======
     public function show($id)
     {
         $user = User::findOrFail($id);
@@ -52,6 +45,12 @@ class UsersController extends Controller
         return response()->json(compact('user'));
     }
 
+    /**
+     * Update user data
+     * @param Request $request
+     * @param $id
+     * @return mixed
+     */
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -78,9 +77,15 @@ class UsersController extends Controller
         $message = "Success: User updated";
 
         $user->save();
+
         return response()->json(compact('message', 'user'));
     }
 
+    /**
+     * Destroy user
+     * @param $id
+     * @return mixed
+     */
     public function destroy($id)
     {
         $user = User::findOrFail($id);
@@ -89,5 +94,4 @@ class UsersController extends Controller
 
         return response()->json(['status' => 'true', 'message' => 'Success: User deleted']);
     }
->>>>>>> ba58562d60cb4f735bf52b5bd0e91750502d802b
 }

@@ -17,7 +17,7 @@ Route::group(['middleware' => 'cors'], function () {
         return Response::json(App\Country::all(), 200, [], JSON_NUMERIC_CHECK);
     });
 
-    // Auth Routes
+    // Authenticated Routes
     Route::controller('authenticate', 'AuthenticateController');
 
     // Upload Routes
@@ -29,5 +29,5 @@ Route::group(['middleware' => 'cors'], function () {
     Route::resource('notifications', 'NotificationsController');
     Route::resource('achievements', 'AchievementsController');
     Route::resource('users', 'UsersController');
-    Route::post('addAch', 'UsersController@add_achievements');
+    Route::post('users/achievements', 'UsersController@storeAchievement');
 });
