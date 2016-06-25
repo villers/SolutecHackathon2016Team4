@@ -14,29 +14,90 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /*Model::unguard();
-        DB::table('users')->delete();
-        $users = array(
-            ['first_name' => 'Ryan', 'last_name' => 'Chenkie', 'login' => 'rchenkie', 'email' => 'ryanchenkie@gmail.com', 'password' => Hash::make('secret'), 'country' => 'france', 'city' => 'lyon', 'postal_code' => '69003', 'address_number' =>'256', 'address' => 'rue paul bert', 'type' => 'candidate', 'points' => 0, 'is_active' => 1, 'token_active' => 0],
+        //Change this value to change the number of users generated
+        $nb_users = 50;
+
+        //Change this value to change the number of jobs ad generated
+        $nb_jobs = 10;
+
+        //This array contains a list of all graduations, change it as you want
+        $graduations = array(
+            'débutant',
+            'Bac',
+            'Bac+1',
+            'Bac+2',
+            'Bac+3',
+            'Bac+4',
+            'Bac+5'
         );
 
-        // Loop through each user above and create the record for them in the database
-        foreach ($users as $user)
-        {
-            User::create($user);
-        }
-        Model::reguard();
-*/
+        //This array contains a list of all companies, change it as you want
+        $companies = array(
+            'DISTRIBUTION CASINO FRANCE',
+            'ADECCO FRANCE',
+            'RENAULT TRUCKS',
+            'BAYER SAS',
+            'SANOFI PASTEUR',
+            'EGEDIS',
+            'IVECO FRANCE',
+            'SA EAUX MINERALES EVIAN',
+            'ALUMINIUM PECHINEY',
+            'SOPRA STERIA GROUP',
+            'ENTREMONT ALLIANCE',
+            'SOCIETE COOPERATIVE D\'APPROVISIONNEMENT RHONE ALPES',
+            'COMPAGNIE NATIONALE DU RHONE', 'BECTON DICKINSON FRANCE',
+            'BIOMERIEUX SA',
+            'AXXES',
+            'JTEKT EUROPE',
+            'FLOREAL',
+            'MYLAN',
+            'MERIAL',
+            'KEM ONE',
+            'NTN-SNR ROULEMENTS',
+            'GROUPE SEB FRANCE',
+            'ENI FRANCE SARL'
+        );
+
+
+        //This array contains all categories of jobs, change it as you want
+        $categories = array(
+            "AGRICULTURE ET PÊCHE, ESPACES NATURELS ET ESPACES VERTS, SOINS AUX ANIMAUX",
+            "ARTS ET FACONNAGE D'OUVRAGES D'ART",
+            "BANQUE, ASSURANCE, IMMOBILIER",
+            "COMMERCE, VENTE ET GRANDE DISTRIBUTION",
+            "COMMUNICATION, MEDIA ET MULTIMEDIA",
+            "CONSTRUCTION, BÂTIMENT ET TRAVAUX PUBLICS",
+            "HÔTELLERIE- RESTAURATION TOURISME LOISIRS ET ANIMATION",
+            "INDUSTRIE",
+            "INSTALLATION ET MAINTENANCE",
+            "SANTE",
+            "SERVICES A LA PERSONNE ET A LA COLLECTIVITE",
+            "SPECTACLE",
+            "SUPPORT A L'ENTREPRISE",
+            "TRANSPORT ET LOGISTIQUE"
+        );
 
         $faker = Faker::create('fr_FR');
 
-        for ($i = 0; $i < 2; $i++) {
+        //Seed for users
+
+        for ($i = 0; $i < $nb_users; $i++) {
+            $login = $faker->word;
+
+            $all_login = DB::table('users')->select('login')->get();
+            for ($i = 0; $i < count($all_login); $i++) {
+                $all_login[$i] = $all_login[$i]->login;
+            }
+            while (in_array($login, $all_login)) {
+                $login = $faker->word;
+            }
+
             DB::table('users')->insert([
-                'type' => $faker->randomElement($array = array ('candidate','recruiter')),
+                'type' => $faker->randomElement($array = array('candidate', 'recruiter')),
                 'points' => $faker->numberBetween($min = 0, $max = 9000),
                 'last_name' => $faker->lastName,
-                'first_name' => $faker->firstName($gender = null|'male'|'female'),
-                'login' => $faker->word,
+                'first_name' => $faker->firstName($gender = null | 'male' | 'female'),
+                'login' => $login,
                 'email' => $faker->email,
                 'password' => bcrypt('azerty'),
                 'country' => 'France',
@@ -44,56 +105,55 @@ class DatabaseSeeder extends Seeder
                 'postal_code' => $faker->postcode,
                 'address_number' => $faker->buildingNumber,
                 'address' => trim(preg_replace('/[0-9]|,+/', '', $faker->streetAddress)),
-                'is_active' => $faker->randomElement($array = array (0, 1)),
+                'is_active' => $faker->randomElement($array = array(0, 1)),
                 'token_active' => bin2hex(random_bytes(20)),
                 'created_at' => date('Y-m-d h:m:s'),
-                'lang'=> 'fr',
-                'can_drive'=> $faker->randomElement($array = array (0, 1)),
+                'graduation' => $faker->randomElement($graduations),
+                'lang' => 'fr',
+                'can_drive' => $faker->randomElement($array = array(0, 1)),
             ]);
         }
 
+        //Seed for jobs ads
 
-/*
+        $recruiters = DB::table('users')->where('type', '=', 'recruiter')->get();
 
-        DB::table('jobs')->insert([
-            'user_id' => 1,
-            'category_id' => 1,
-            'country' => 'France',
-            'city' => 'Lyon',
-            'postal_code' => '69000',
-            'entreprise_desc' => 'Epitech, école informatique',
-            'message' => "Afin d'encadrer une classe de développeurs web, nous recherchons un développeur confirmé en tant que responsable pédagogique",
-            'lang' => 'fr',
-            'graduation' => 'Bac +2',
-            'salary' => '3000.35',
-            'created_at' => date('Y-m-d h:m:s'),
-        ]);
+        for ($i = 0; $i < count($recruiters); $i++) {
+            $recruiters[$i] = $recruiters[$i]->login;
+        }
 
-        DB::table('categories')->insert([
-            'name' => 'informatique',
-            'created_at' => date('Y-m-d h:m:s'),
-        ]);
+        for ($i = 0; $i < $nb_jobs; $i++) {
+            DB::table('jobs')->insert([
+                'user_id' => $faker->randomElement($recruiters),
+                'category_id' => 1,
+                'country' => 'France',
+                'city' => $faker->city,
+                'postal_code' => $faker->postcode,
+                'entreprise_desc' => $faker->randomElement($companies),
+                'message' => $faker->text($maxNbChars = 300),
+                'lang' => 'fr',
+                'graduation' => $faker->randomElement($graduations),
+                'salary' => $faker->randomFloat($nbMaxDecimals = NULL, $min = 1300, $max = 4000),
+                'created_at' => date('Y-m-d h:m:s'),
+            ]);
+        }
 
-        DB::table('notifications')->insert([
-            'user_id' => 1,
-            'has_read' => 0,
-            'message' => 'Un recruteur a visité votre profil',
-            'created_at' => date('Y-m-d h:m:s'),
-        ]);
+        //Seed for categories
 
-        DB::table('achievements_list')->insert([
-            'user_id' => 1,
-            'achievements_id' => 1,
-            'has_read' => 0,
-            'created_at' => date('Y-m-d h:m:s'),
-        ]);
+        foreach ($categories as $v) {
+            DB::table('categories')->insert([
+                'name' => $v,
+                'created_at' => date('Y-m-d h:m:s'),
+            ]);
+        }
 
+        /*
         DB::table('achievements')->insert([
             'message' => 'Félicitations vous avez accompli le haut fait "Super recruteur !"',
             'points' => 100,
             'icon' => '3D_rotation',
             'created_at' => date('Y-m-d h:m:s'),
         ]);
-*/
+        */
     }
 }
