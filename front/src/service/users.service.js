@@ -29,6 +29,10 @@ class UsersService {
     return SERVICES.get('$http').delete(`${this.apiUrl}/users/${id}`);
   }
 
+  register(params) {
+    return SERVICES.get('$http').post(`${this.apiUrl}/register`, params);
+  }
+
   /**
    * Factory of this class
    * @returns {UsersService}

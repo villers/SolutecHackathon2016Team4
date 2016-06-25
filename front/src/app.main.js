@@ -43,7 +43,7 @@ angular
 
     // Satellizer configuration that specifies which API
     $authProvider.baseUrl = CONFIG.API_URL;
-    $authProvider.loginUrl = '/api/authenticate';
+    $authProvider.loginUrl = '/authenticate';
   });
 
 export default moduleName;
