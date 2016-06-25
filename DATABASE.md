@@ -27,6 +27,8 @@ Nom de la base de donnée : xetian
 | address        | string        | 70 caractères max
 | is_active      | boolean       | 0 par défaut
 | token_active   | string        | 255 caractères max
+| graduation     | string        | 255 caractères max
+| lang           | string       | 50 caractères max
 
 Faut-il des champs supplémentaires ? Laravel ajoutera created_at et updated_at si vous utilisez timestamp() dans les migrations.
 
