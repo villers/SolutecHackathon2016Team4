@@ -1,7 +1,7 @@
 import angular from 'angular';
 import router from 'angular-ui-router';
 import material from 'angular-material';
-import storage from 'ngstorage';
+import storage from 'angular-storage';
 import animate from 'angular-animate';
 import aria from 'angular-aria';
 
