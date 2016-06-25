@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Input;
 
 
 
+
 class CreateUserRequest extends Request
 {
     /**

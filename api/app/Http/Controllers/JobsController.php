@@ -91,7 +91,7 @@ class JobsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $job = Achievement::find($id);
+        $job = Job::find($id);
 
         $job->user_id = $request['user_id'];
         $job->category_id = $request['category_id'];

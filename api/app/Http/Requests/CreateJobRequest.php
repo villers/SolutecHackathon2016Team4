@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class CreateJobRequest extends Request
 {
