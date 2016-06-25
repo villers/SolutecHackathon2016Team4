@@ -21,13 +21,15 @@ Route::group(['middleware' => 'cors'], function () {
     Route::controller('authenticate', 'AuthenticateController');
 
     // Upload Routes
-    Route::post('upload', 'UploadController@upload');
+    Route::group(['middleware' => 'jwt.auth'], function () {
+        Route::post('upload', 'UploadController@upload');
 
-    // CRUD Routes
-    Route::resource('categories', 'CategoriesController');
-    Route::resource('jobs', 'JobsController');
-    Route::resource('notifications', 'NotificationsController');
-    Route::resource('achievements', 'AchievementsController');
-    Route::resource('users', 'UsersController');
-    Route::post('users/achievements', 'UsersController@storeAchievement');
+        // CRUD Routes
+        Route::resource('categories', 'CategoriesController');
+        Route::resource('jobs', 'JobsController');
+        Route::resource('notifications', 'NotificationsController');
+        Route::resource('achievements', 'AchievementsController');
+        Route::resource('users', 'UsersController');
+        Route::post('users/achievements', 'UsersController@storeAchievement');
+    });
 });
