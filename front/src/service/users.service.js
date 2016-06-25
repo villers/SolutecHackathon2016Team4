@@ -33,6 +33,10 @@ class UsersService {
     return SERVICES.get('$http').post(`${this.apiUrl}/register`, params);
   }
 
+  country() {
+    return SERVICES.get('$http').get(`${this.apiUrl}/country`);
+  }
+
   /**
    * Factory of this class
    * @returns {UsersService}
