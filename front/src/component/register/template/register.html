@@ -1,0 +1,129 @@
+<div layout="row" flex layout-padding layout-fill layout-align="center center">
+  <div flex="40" flex-lg="50" flex-md="70" flex-sm="100" class="register-frame">
+    <md-card>
+      <md-toolbar class="padding-20">
+        <div layout="row" layout-align="center center">
+          <h1 class="md-headline">S'inscrire</h1>
+        </div>
+      </md-toolbar>
+
+      <md-toolbar class="md-warn" ng-if="vm.error">
+        <div class="md-toolbar-tools">
+          <h2 class="md-flex">{{vm.error}}</h2>
+        </div>
+      </md-toolbar>
+
+      <md-content class="md-padding">
+        <form name="register">
+          <md-input-container class="full-width">
+            <label for="last_name">Nom</label>
+            <input id="last_name" label="Nom" name="last_name" type="text" ng-model="vm.credentials.last_name" required/>
+            <div ng-messages="register.last_name.$error" ng-if="register.last_name.$dirty">
+              <div ng-message when="required">Nom requis</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="full-width">
+            <label for="first_name">Prénom</label>
+            <input id="first_name" label="Prénom" name="first_name" type="text" ng-model="vm.credentials.first_name" required/>
+            <div ng-messages="register.first_name.$error" ng-if="register.first_name.$dirty">
+              <div ng-message when="required">Prénom requis</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="full-width">
+            <label for="login">Identifiant</label>
+            <input id="login" label="Identifiant" name="login" type="text" ng-model="vm.credentials.login" required/>
+            <div ng-messages="register.login.$error" ng-if="register.login.$dirty">
+              <div ng-message when="required">Identifiant requis</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="full-width">
+            <label for="email">Email</label>
+            <input id="email" label="Email" name="email" type="email" ng-model="vm.credentials.email" required/>
+            <div ng-messages="register.email.$error" ng-if="register.email.$dirty">
+              <div ng-message when="required">Email requis</div>
+              <div ng-message when="email">Email non valide</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="full-width">
+            <label for="password">Mot de passe</label>
+            <input  id="password" label="Password" name="password" type="password" ng-model="vm.credentials.password" required/>
+            <div ng-messages for="register.password.$error" ng-if="register.password.$dirty">
+              <div ng-message when="required">Password requis</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="full-width">
+            <label for="password_confirmation">Confirmation de mot de passe</label>
+            <input  id="password_confirmation" label="password_confirmation" name="password_confirmation" type="password" ng-model="vm.credentials.password_confirmation" required/>
+            <div ng-messages for="register.password_confirmation.$error" ng-if="register.password_confirmation.$dirty">
+              <div ng-message when="required">Mot de passe non identique requis</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="full-width">
+            <label for="country">Pays</label>
+            <md-select id="country" ng-model="vm.credentials.country" aria-label="Pays">
+              <md-option ng-repeat="country in vm.countries" value="{{country[2]}}">
+                {{country[3]}}
+              </md-option>
+            </md-select>
+            <div ng-messages="register.country.$error" ng-if="register.country.$dirty">
+              <div ng-message when="required">Pays requis</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="full-width">
+            <label for="city">Ville</label>
+            <input id="city" label="Ville" name="city" type="text" ng-model="vm.credentials.city" required/>
+            <div ng-messages="register.city.$error" ng-if="register.city.$dirty">
+              <div ng-message when="required">Ville requis</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="full-width">
+            <label for="postal_code">Code postal</label>
+            <input id="postal_code" label="Code postal" name="postal_code" type="number" ng-model="vm.credentials.postal_code" required/>
+            <div ng-messages="register.postal_code.$error" ng-if="register.postal_code.$dirty">
+              <div ng-message when="required">Code postal requis</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="full-width">
+            <label for="address_number">Numéro de rue</label>
+            <input id="address_number" label="Numéro de rue" name="address_number" type="number" ng-model="vm.credentials.address_number" required/>
+            <div ng-messages="register.address_number.$error" ng-if="register.address_number.$dirty">
+              <div ng-message when="required">Numéro de rue requis</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="full-width">
+            <label for="address">Adresse</label>
+            <input id="address" label="Adresse" name="address" type="text" ng-model="vm.credentials.address" required/>
+            <div ng-messages="register.address.$error" ng-if="register.address.$dirty">
+              <div ng-message when="required">Adresse requis</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="full-width">
+            <label for="type">Types</label>
+            <md-select id="type" ng-model="vm.credentials.type" aria-label="Types">
+              <md-option ng-repeat="type in vm.types" value="{{type}}">
+                {{type}}
+              </md-option>
+            </md-select>
+            <div ng-messages="register.type.$error" ng-if="register.type.$dirty">
+              <div ng-message when="required">Type requis</div>
+            </div>
+          </md-input-container>
+
+          <md-button class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10"  ng-click="vm.register()" ng-disabled="login.$invalid" aria-label="S'inscrire">S'inscrire</md-button>
+          <md-button class="md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" ui-sref="login" aria-label="Se connecter">Se connecter</md-button>
+        </form>
+      </md-content>
+    </md-card>
+  </div>
+</div>

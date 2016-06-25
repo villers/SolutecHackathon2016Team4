@@ -11,21 +11,30 @@
 |
 */
 
-Route::group(['middleware' => 'cors'], function () {
 
-    // Country list
+Route::group(['middleware' => 'cors'], function () {
+    // Country Routes
     Route::get('country', function () {
         return Response::json(App\Country::all(), 200, [], JSON_NUMERIC_CHECK);
     });
 
-    // Login Routes
+    // Auth Routes
     Route::controller('authenticate', 'AuthenticateController');
 
+    // Upload Routes
+    Route::post('upload', 'UploadController@upload');
+
     // CRUD Routes
+
     Route::resource('categories', 'CategoriesController');
     Route::resource('jobs', 'JobsController');
     Route::resource('notifications', 'NotificationsController');
     Route::resource('achievements', 'AchievementsController');
     Route::resource('users', 'UsersController');
+<<<<<<< HEAD
     Route::post('addAch','UsersController@add_achievements' );
+=======
+
+>>>>>>> ba58562d60cb4f735bf52b5bd0e91750502d802b
 });
+
