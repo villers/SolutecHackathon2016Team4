@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="overflow-hidden">
 <head>
     <base href="/">
     <meta charset="utf-8">
@@ -16,24 +16,25 @@
         }
     </style>
 </head>
-<body ng-cloak>
-  <div layout="column" layout-fill>
+<body ng-cloak layout="row">
+  <div layout="column" flex>
+    <md-toolbar>
+      <toolbar></toolbar>
+    </md-toolbar>
 
+    <md-content layout="row" flex>
+      <div layout="column" flex>
+        <div ui-view></div>
+      </div>
+    </md-content>
+
+    <footer layout="row">
       <md-toolbar>
-          <toolbar></toolbar>
+        <div layout="row" layout-align="center center" flex>
+          FOOTER INFO
+        </div>
       </md-toolbar>
-
-      <main flex>
-          <div ui-view></div>
-      </main>
-
-      <footer>
-          <md-toolbar class="md-scroll-shrink">
-              <div layout="row" layout-align="center center" flex>
-                  FOOTER INFO
-              </div>
-          </md-toolbar>
-      </footer>
+    </footer>
   </div>
 
   <script src="./app.js"></script>
