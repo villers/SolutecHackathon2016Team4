@@ -17,11 +17,6 @@ webpackConfig.plugins = [
   new webpack.optimize.OccurrenceOrderPlugin(),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoErrorsPlugin(),
-  new webpack.ProvidePlugin({
-    'window.$': 'jquery',
-    'window.jQuery': 'jquery',
-    'Hammer': 'hammerjs/hammer'
-  }),
 ].concat(webpackConfig.plugins);
 
 module.exports = webpackConfig;
