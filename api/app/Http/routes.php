@@ -23,9 +23,6 @@ Route::group(['middleware' => 'cors'], function()
     Route::resource('authenticate', 'AuthenticateController');
     Route::post('authenticate', 'AuthenticateController@authenticate');
 
-
-
-
     // Register & validate Routes
 
     Route::post('register', 'RegisterController@register');
