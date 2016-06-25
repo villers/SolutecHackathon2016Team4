@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Category;
 use App\Http\Requests;
 
 class CategoriesController extends Controller
@@ -15,7 +15,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $category = category::all();
+
+        return response()->json(compact('category'));
     }
 
     /**
@@ -25,7 +27,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -34,9 +36,17 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Requests\CreateCategoryRequest $request)
     {
-        //
+        $job = Category::create([
+            "name" => $request["name"]
+        ]);
+
+
+        $status = true;
+        $message = 'Catégories crée';
+
+        return response()->json(compact('status', 'message', 'Category'));
     }
 
     /**
@@ -81,6 +91,10 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $job = Job::find($id);
+
+        $job->delete();
+
+        return response()->json(['status' => 'true', 'message' => 'Catégorie supprimé !']);
     }
 }
