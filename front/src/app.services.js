@@ -5,6 +5,7 @@ import AchievementsService from './service/achievements.service';
 import CategoriesService from './service/categories.service';
 import NotificationsService from './service/notifications.service';
 import UsersService from './service/users.service';
+import JobsService from './service/jobs.service';
 
 const moduleName = 'app.services';
 
@@ -15,6 +16,7 @@ angular
   .factory('categoriesService', CategoriesService.factory)
   .factory('NotificationsService', NotificationsService.factory)
   .factory('usersService', UsersService.factory)
+  .factory('jobsService', JobsService.factory)
   .factory('configService', ConfigService.factory);
 
 export default moduleName;
