@@ -1,23 +1,22 @@
-const skip = ($state, $auth) =>
-  new Promise(resolve => {
+function skip($auth) {
+  return new Promise((resolve, reject) => {
+    if ($auth.isAuthenticated()) {
+      reject();
+    } else {
+      resolve();
+    }
+  });
+}
+
+function authenticator($location, $auth) {
+  return new Promise(resolve => {
     if ($auth.isAuthenticated()) {
       resolve();
     } else {
-      $state.go('login');
+      $location.path('/auth');
     }
   });
-
-const authenticator = ($q, $location, $auth) => {
-  const deferred = $q.defer();
-
-  if ($auth.isAuthenticated()) {
-    deferred.resolve();
-  } else {
-    $location.path('/login');
-  }
-
-  return deferred.promise;
-};
+}
 
 export const ROUTES = {
   default: '/',
@@ -31,13 +30,43 @@ export const ROUTES = {
     name: 'login',
     url: '/auth',
     template: '<login></login>',
-    resolve: { authenticator },
+    resolve: { skip },
   },
   register: {
     name: 'register',
     url: '/register',
     template: '<register></register>',
     resolve: { skip },
+  },
+  profil: {
+    name: 'profil',
+    url: '/profil',
+    template: '<profil></profil>',
+    resolve: { authenticator },
+  },
+  makeCv: {
+    name: 'makeCv',
+    url: '/make-cv',
+    template: '<make-cv></make-cv>',
+    resolve: { authenticator },
+  },
+  achievements: {
+    name: 'achievements',
+    url: '/achievements',
+    template: '<achievements></achievements>',
+    resolve: { authenticator },
+  },
+  notifications: {
+    name: 'notifications',
+    url: '/notifications',
+    template: '<notifications></notifications>',
+    resolve: { authenticator },
+  },
+  comparator: {
+    name: 'comparator',
+    url: '/comparator',
+    template: '<comparator></comparator>',
+    resolve: { authenticator },
   },
 };
 
