@@ -2,7 +2,7 @@ import angular from 'angular';
 
 import SampleDirective from './directive/sample.directive';
 
-const moduleName = 'app.directivess';
+const moduleName = 'app.directives';
 
 angular
   .module(moduleName, [])
