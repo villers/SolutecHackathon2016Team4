@@ -16,8 +16,25 @@
         }
     </style>
 </head>
-<body ng-cloak>
-    <main class="ui-view"></main>
+<body>
+
+<div layout="column" layout-fill >
+    <header>
+        <md-toolbar md-scroll-shrink ui-view="toolbar"></md-toolbar>
+    </header>
+
+    <main flex>
+        <div ui-view></div>
+    </main>
+
+    <footer>
+        <md-toolbar class="md-scroll-shrink">
+            <div layout="row" layout-align="center center" flex>
+                FOOTER INFO
+            </div>
+        </md-toolbar>
+    </footer>
+</div>
 
     <script src="./app.js"></script>
 </body>

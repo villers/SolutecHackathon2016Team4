@@ -1,11 +1,11 @@
 const SERVICES = new Map();
 
-class NetflixLogin {
+class Login {
   constructor($state) {
     SERVICES.set('$state', $state);
   }
 }
 
-NetflixLogin.$inject = ['$state'];
+Login.$inject = ['$state'];
 
-export default NetflixLogin;
+export default Login;
