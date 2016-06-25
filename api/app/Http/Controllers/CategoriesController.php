@@ -38,7 +38,7 @@ class CategoriesController extends Controller
      */
     public function store(Requests\CreateCategoryRequest $request)
     {
-        $job = Category::create([
+        $category = Category::create([
             "name" => $request["name"]
         ]);
 
@@ -46,7 +46,7 @@ class CategoriesController extends Controller
         $status = true;
         $message = 'Catégories crée';
 
-        return response()->json(compact('status', 'message', 'Category'));
+        return response()->json(compact('status', 'message', 'category'));
     }
 
     /**
@@ -91,9 +91,9 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $job = Job::find($id);
+        $category = Category::find($id);
 
-        $job->delete();
+        $category->delete();
 
         return response()->json(['status' => 'true', 'message' => 'Catégorie supprimé !']);
     }
