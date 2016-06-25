@@ -25,6 +25,8 @@ Nom de la base de donnée : xetian
 | postal_code    | integer       | max 5 chiffres, UNSIGNED car ne peut pas être négatif et ZEROFILL pour compléter les zéros |
 | address_number | integer       | UNSIGNED car ne peut pas être négatif |
 | address        | string        | 70 caractères max
+| is_active      | boolean       | 0 par défaut
+| token_active   | string        | 255 caractères max
 
 Faut-il des champs supplémentaires ? Laravel ajoutera created_at et updated_at si vous utilisez timestamp() dans les migrations.
 
