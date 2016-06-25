@@ -45,13 +45,21 @@ class AuthenticateController extends Controller
         }
         // if no errors return a JWT
         $status = true;
-        return response()->json(compact('status', 'token', 'credentials'));
+
+
+        $user = User::where('email', $credentials['email'])->first();
+        return response()->json(compact('status', 'token', 'user'));
     }
 
-    public function register(Request $request)
-    {
-        $credentials = $request->only('first_name', 'last_name', 'login', 'email', 'password', 'country', 'city', 'postal_code', 'address_number', 'adress');
+    public function active_account($data){
 
-        
+        $user = User::where('token_active', $data)->first();
+
+        $user->active = 1;
+        $user->token_active = 0;
+        $user->save();
+
+        return response()->json(compact(['status' => true, 'message' => 'Compte activé, vous pouvez vous connecter !']));
+
     }
 }

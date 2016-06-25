@@ -17,10 +17,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         DB::table('users')->delete();
         $users = array(
-            ['name' => 'Ryan Chenkie', 'email' => 'ryanchenkie@gmail.com', 'password' => Hash::make('secret')],
-            ['name' => 'Chris Sevilleja', 'email' => 'chris@scotch.io', 'password' => Hash::make('secret')],
-            ['name' => 'Holly Lloyd', 'email' => 'holly@scotch.io', 'password' => Hash::make('secret')],
-            ['name' => 'Adnan Kukic', 'email' => 'adnan@scotch.io', 'password' => Hash::make('secret')],
+            ['first_name' => 'Ryan', 'last_name' => 'Chenkie', 'login' => 'rchenkie', 'email' => 'ryanchenkie@gmail.com', 'password' => Hash::make('secret'), 'country' => 'france', 'city' => 'lyon', 'postal_code' => '69003', 'address_number' =>'256', 'address' => 'rue paul bert', 'type' => 'candidate', 'points' => 0, 'is_active' => 1, 'token_active' => 0],
         );
 
         // Loop through each user above and create the record for them in the database
