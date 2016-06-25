@@ -7,6 +7,12 @@
         </div>
       </md-toolbar>
 
+      <md-content class="md-padding" ng-if="vm.error">
+        <div md-whiteframe="3" class="padded md-warn">
+          {{vm.error}}
+        </div>
+      </md-content>
+
       <md-content class="md-padding">
         <form name="login">
           <md-input-container class="full-width">

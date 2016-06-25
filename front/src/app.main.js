@@ -10,6 +10,7 @@ import satellizer from 'satellizer';
 import services from './app.services';
 import components from './app.components';
 import directives from './app.directives';
+import theme from './app.theme';
 
 import ROUTES from './constant/routes';
 import CONFIG from './constant/config';
@@ -25,6 +26,7 @@ angular
     material,
     messages,
     satellizer,
+    theme,
     services,
     components,
     directives,
