@@ -20,8 +20,6 @@ class AuthenticateController extends Controller
         $this->middleware('jwt.auth', ['except' => ['authenticate']]);
     }
 
-<<<<<<< HEAD
-=======
     public function index()
     {
         // Retrieve all the users in the database and return them
@@ -29,7 +27,6 @@ class AuthenticateController extends Controller
         return $users;
     }
 
->>>>>>> sekourm
     /**
      * Return a JWT
      **/
@@ -71,7 +68,7 @@ class AuthenticateController extends Controller
         $user->token_active = 0;
         $user->save();
 
-        return response()->json(compact(['status' => true, 'message' => 'Compte activé, vous pouvez vous connecter !']));
+        return response()->json(['status' => true, 'message' => 'Compte activé, vous pouvez vous connecter !']);
 
     }
 }

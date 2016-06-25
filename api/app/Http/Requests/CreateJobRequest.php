@@ -3,12 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Illuminate\Support\Facades\Input;
 
-
-
-class CreateUserRequest extends Request
+class CreateJobRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,19 +24,19 @@ class CreateUserRequest extends Request
     public function rules()
     {
         return [
-            "login" => "unique:users,login|required|max:15",
-            "email" => "unique:users,email|required|max:255",
-            "first_name" => "required|max:35",
-            "last_name" => "required|max:35",
-            "password" => "required|max:255|confirmed",
-            "password_confirmation" => "required|max:255",
+            "user_id" => "required",
+            "category_id" => "required",
             "country" => "required|max:70",
             "city" => "required|max:70",
-            "postal_code" => "required|max:5",
-            "address_number" => "required",
-            "address" => "required|max:70",
+            "postal_code" => "required|max:70",
+            "entreprise_desc" => "required|max:6000",
+            "message" => "required|max:6000",
+            "lang" => "required|max:50",
+            "graduation" => "required|max:50",
+            "salary" => "required",
         ];
     }
+
 
 
     public function response(array $errors)

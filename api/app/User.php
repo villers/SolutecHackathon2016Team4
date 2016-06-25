@@ -15,7 +15,7 @@ class User extends Authenticatable
     // The attributes that should be hidden for arrays.
 
     protected $hidden = [
-    'password',
+        'password',
     ];
 
     public function notifications()
