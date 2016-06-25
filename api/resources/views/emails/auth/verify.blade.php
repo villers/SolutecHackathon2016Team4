@@ -7,7 +7,7 @@
 <h2>{{ $title }}</h2>
 
 <div>
-	{!! $intro . link_to('authenticate/ActiveAccount/' . $active_code, $link) !!}.<br>
+	{!! $intro . ' ' . link_to('authenticate/active/' . $active_code, $link) !!}.<br>
 </div>
 </body>
 </html>
