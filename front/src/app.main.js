@@ -7,21 +7,22 @@ import aria from 'angular-aria';
 
 import services from './app.services';
 import components from './app.components';
+import directives from './app.directives';
 
 import ROUTES from './constant/routes';
 
 const moduleName = 'app';
 
 angular
-    .module(moduleName, [router, aria, animate, storage, material, services, components])
-    .config(($stateProvider, $locationProvider, $urlRouterProvider) => {
-      $locationProvider.html5Mode(true);
-      $urlRouterProvider.otherwise(ROUTES.default);
+  .module(moduleName, [router, aria, animate, storage, material, services, components, directives])
+  .config(($stateProvider, $locationProvider, $urlRouterProvider) => {
+    $locationProvider.html5Mode(true);
+    $urlRouterProvider.otherwise(ROUTES.default);
 
-      Object
-          .keys(ROUTES)
-          .filter(route => route !== 'default')
-          .forEach(route => $stateProvider.state(route, ROUTES[route]));
-    });
+    Object
+      .keys(ROUTES)
+      .filter(route => route !== 'default')
+      .forEach(route => $stateProvider.state(route, ROUTES[route]));
+  });
 
 export default moduleName;
