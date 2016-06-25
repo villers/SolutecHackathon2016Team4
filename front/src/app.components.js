@@ -4,6 +4,7 @@ import Toolbar from './component/toolbar/toolbar.component';
 import Login from './component/login/login.component';
 import Register from './component/register/register.component';
 import Home from './component/home/home.component';
+import Achievements from './component/achievements/achievements.component';
 
 const moduleName = 'app.components';
 
@@ -12,6 +13,7 @@ angular
     .component('toolbar', Toolbar)
     .component('login', Login)
     .component('register', Register)
-    .component('home', Home);
+    .component('home', Home)
+    .component('achievements', Achievements);
 
 export default moduleName;

@@ -1,0 +1,28 @@
+<md-content class="md-padding">
+  <md-card>
+    <md-toolbar layout="row" class="md-hue-1">
+      <div class="md-toolbar-tools">
+        <span>Vos derniers trophées</span>
+      </div>
+    </md-toolbar>
+    <md-content layout="row" flex>
+      <md-list flex>
+        <!-- Achievement -->
+        <md-list-item class="md-3-line md-long-text" ng-repeat="achievement in vm.achievements">
+          <img ng-src="https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png" class="md-avatar"
+               alt="achievement">
+          <div class="md-list-item-text">
+            <p>{{ achievement.created_at | date : format : timezone}}</p>
+            <h3>{{ achievement.message }}</h3>
+            <p>
+              {{ achievement.points }}
+              <md-icon md-font-icon="zmdi zmdi-circle"></md-icon>
+            </p>
+          </div>
+          <md-divider></md-divider>
+        </md-list-item>
+        <!-- end Achievement -->
+      </md-list>
+  </md-card>
+</md-content>
+</md-content>
