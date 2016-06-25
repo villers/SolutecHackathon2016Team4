@@ -10,11 +10,6 @@ use App\User;
 
 class UploadController extends Controller 
 {
-	public function index()
-	{
-		return view('upload');
-	}
-
 	public function upload()
 	{
 		$id = 2;
