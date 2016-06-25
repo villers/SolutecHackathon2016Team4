@@ -17,6 +17,18 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'api'], function()
 {
+
+    // Login Routes
+
     Route::resource('authenticate', 'AuthenticateController');
     Route::post('authenticate', 'AuthenticateController@authenticate');
+
+
+
+    // Register & validate Routes
+
+    Route::post('register', 'RegisterController@register');
+    Route::get('active_account/{token}', 'RegisterController@active_account');
+
+
 });
