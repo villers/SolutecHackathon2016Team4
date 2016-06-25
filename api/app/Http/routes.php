@@ -19,7 +19,19 @@ Route::group(['middleware' => 'cors'], function () {
     });
 
     // Login Routes
+<<<<<<< Updated upstream
     Route::controller('authenticate', 'AuthenticateController');
+=======
+
+    Route::resource('authenticate', 'AuthenticateController');
+    Route::post('authenticate', 'AuthenticateController@authenticate');
+    Route::post('upload', 'UploadController@upload');
+
+    // Register & validate Routes
+
+    Route::post('register', 'RegisterController@register');
+    Route::get('active_account/{token}', 'RegisterController@active_account');
+>>>>>>> Stashed changes
 
     // CRUD Routes
     Route::resource('categories', 'CategoriesController');

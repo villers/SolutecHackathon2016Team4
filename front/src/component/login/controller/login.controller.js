@@ -1,12 +1,11 @@
 const SERVICES = new Map();
 
 class Login {
-
-
-  constructor($state, $auth) {
+  constructor($state, $auth, $mdToast) {
     SERVICES
       .set('$state', $state)
-      .set('$auth', $auth);
+      .set('$auth', $auth)
+      .set('$mdToast', $mdToast);
 
     this.error = null;
 
@@ -18,14 +17,21 @@ class Login {
 
   login() {
     SERVICES.get('$auth').login(this.credentials).then(() => {
-      // If login is successful, redirect to the users state
+      const toast = SERVICES.get('$mdToast').simple()
+        .textContent('Connecté')
+        .highlightAction(true)
+        .highlightClass('md-accent')
+        .hideDelay(3000)
+        .position('top right');
+
+      SERVICES.get('$mdToast').show(toast);
       SERVICES.get('$state').go('dashboard', {});
-    }, (response) => {
-      this.error = response.error;
+    }, response => {
+      this.error = response.data.error;
     });
   }
 }
 
-Login.$inject = ['$state', '$auth'];
+Login.$inject = ['$state', '$auth', '$mdToast'];
 
 export default Login;
