@@ -38,6 +38,15 @@ export const ROUTES = {
     template: '<register></register>',
     resolve: { skip },
   },
+  logout: {
+    name: 'logout',
+    url: '/logout',
+    controller: ($auth, $state) => {
+      $auth.logout();
+      $state.go('login');
+    },
+    resolve: { authenticator },
+  },
   profil: {
     name: 'profil',
     url: '/profil',
