@@ -7,12 +7,8 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Response;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
-<<<<<<< HEAD
 use App\Jobs\SendMail;
-
-=======
 use Tymon\JWTAuth\Facades\JWTAuth;
->>>>>>> ba58562d60cb4f735bf52b5bd0e91750502d802b
 
 class AuthenticateController extends Controller
 {

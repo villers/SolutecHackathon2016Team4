@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::group(['middleware' => 'cors'], function () {
     // Country Routes
     Route::get('country', function () {
@@ -25,16 +24,10 @@ Route::group(['middleware' => 'cors'], function () {
     Route::post('upload', 'UploadController@upload');
 
     // CRUD Routes
-
     Route::resource('categories', 'CategoriesController');
     Route::resource('jobs', 'JobsController');
     Route::resource('notifications', 'NotificationsController');
     Route::resource('achievements', 'AchievementsController');
     Route::resource('users', 'UsersController');
-<<<<<<< HEAD
-    Route::post('addAch','UsersController@add_achievements' );
-=======
-
->>>>>>> ba58562d60cb4f735bf52b5bd0e91750502d802b
+    Route::post('addAch', 'UsersController@add_achievements');
 });
-
