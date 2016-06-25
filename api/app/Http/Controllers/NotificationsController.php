@@ -17,18 +17,7 @@ class NotificationsController extends Controller
     public function index()
     {
         $notification = Notification::all();
-
         return response()->json(compact('notification'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -43,12 +32,9 @@ class NotificationsController extends Controller
             "user_id" => $request['user_id'],
             "has_read" => $request['has_read'],
             "message" => $request['message'],
-        ]);
-
-
+            ]);
         $status = true;
         $message = 'Notification crée !';
-
         return response()->json(compact('status', 'message', 'notification'));
     }
 
@@ -60,18 +46,8 @@ class NotificationsController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $notification = Notification::findOrFail($id);
+        return response()->json(compact('notification'));
     }
 
     /**
@@ -83,7 +59,12 @@ class NotificationsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $notification = Notification::findOrFail($id);
+        $notification->user_id = $request['user_id'];
+        $notification->has_read = $request['has_read'];
+        $notification->message = $request['message'];
+        $notification->save();
+        return response()->json(['status' => 'true', 'message' => 'notification édité !']);
     }
 
     /**
@@ -95,9 +76,7 @@ class NotificationsController extends Controller
     public function destroy($id)
     {
         $notification = Notification::find($id);
-
         $notification->delete();
-
         return response()->json(['status' => 'true', 'message' => 'Notification supprimé !']);
     }
 }

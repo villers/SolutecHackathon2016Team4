@@ -18,18 +18,7 @@ class JobsController extends Controller
     public function index()
     {
         $job = Job::all();
-
         return response()->json(compact('job'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -51,12 +40,9 @@ class JobsController extends Controller
             "lang" => $request['lang'],
             "graduation" => $request['graduation'],
             "salary" => $request['salary'],
-        ]);
-
-
+            ]);
         $status = true;
         $message = 'Job crée';
-
         return response()->json(compact('status', 'message', 'job'));
     }
 
@@ -68,18 +54,8 @@ class JobsController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $job = Job::findOrFail($id);
+        return response()->json(compact('job'));
     }
 
     /**
@@ -91,8 +67,7 @@ class JobsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $job = Achievement::find($id);
-
+        $job = Achievement::findOrFail($id);
         $job->user_id = $request['user_id'];
         $job->category_id = $request['category_id'];
         $job->country = $request['country'];
@@ -103,11 +78,8 @@ class JobsController extends Controller
         $job->lang = $request['lang'];
         $job->graduation = $request['graduation'];
         $job->salary = $request['salary'];
-
         $job->save();
-
         return response()->json(['status' => 'true', 'message' => 'Job édité !']);
-
     }
 
     /**
@@ -118,10 +90,8 @@ class JobsController extends Controller
      */
     public function destroy($id)
     {
-        $job = Job::find($id);
-
+        $job = Job::findOrFail($id);
         $job->delete();
-
         return response()->json(['status' => 'true', 'message' => 'Job supprimé !']);
 
     }

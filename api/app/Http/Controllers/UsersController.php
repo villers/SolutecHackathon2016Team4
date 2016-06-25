@@ -17,14 +17,24 @@ class UsersController extends Controller
     public function index()
     {
         $user = User::all();
-
         return response()->json(compact('user'));
     }
 
+       /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return response()->json(compact('user'));
+    }
+
+
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-
+        $user = User::findOrFail($id);
         $user->type = $request['type'];
         $user->points = $request['points'];
         $user->last_name = $request['last_name'];
@@ -39,19 +49,16 @@ class UsersController extends Controller
         $user->address = $request['address'];
         $user->graduation = $request['graduation'];
         $user->can_drive = $request['can_drive'];
-
+        $user->lang = $request['lang'];
+        $user->can_drive = $request['can_drive'];
         $user->save();
-
         return response()->json(['status' => 'true', 'message' => 'user édité !']);
     }
 
-
     public function destroy($id)
     {
-        $user = User::find($id);
-
+        $user = User::findOrFail($id);
         $user->delete();
-
         return response()->json(['status' => 'true', 'message' => 'User supprimé !']);
     }
 }

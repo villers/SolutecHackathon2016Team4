@@ -17,21 +17,9 @@ class AchievementsController extends Controller
     public function index()
     {
         $achievement = Achievement::all();
-
         return response()->json(compact('achievement'));
-
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -44,12 +32,9 @@ class AchievementsController extends Controller
             "message" => $request["message"],
             "points" => $request["points"],
             "icon" => $request["icon"]
-        ]);
-
-
+            ]);
         $status = true;
         $message = 'Haut-fait crée !';
-
         return response()->json(compact('status', 'message', 'achievement'));
     }
 
@@ -61,18 +46,8 @@ class AchievementsController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $achievement = Achievement::findOrFail($id);
+        return response()->json(compact('achievement'));
     }
 
     /**
@@ -84,16 +59,12 @@ class AchievementsController extends Controller
      */
     public function update(Requests\CreateAchievementRequest $request, $id)
     {
-        $achievement = Achievement::find($id);
-
+        $achievement = Achievement::findOrFail($id);
         $achievement->message = $request['message'];
         $achievement->points = $request['points'];
         $achievement->icon = $request['icon'];
-
         $achievement->save();
-
         return response()->json(['status' => 'true', 'message' => 'Haut-fait édité !']);
-
     }
 
     /**
@@ -104,11 +75,8 @@ class AchievementsController extends Controller
      */
     public function destroy($id)
     {
-        $achievement = Achievement::find($id);
-
+        $achievement = Achievement::findOrFail($id);
         $achievement->delete();
-
         return response()->json(['status' => 'true', 'message' => 'Haut-fait supprimé !']);
-
     }
 }
