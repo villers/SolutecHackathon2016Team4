@@ -18,11 +18,11 @@ class CategoriesService {
   }
 
   create(params) {
-    return SERVICES.get('$http').post(`${this.apiUrl}/categories/${id}`, params);
+    return SERVICES.get('$http').post(`${this.apiUrl}/categories`, params);
   }
 
-  update(id) {
-    return SERVICES.get('$http').put(`${this.apiUrl}/categories/${id}`);
+  update(id, params) {
+    return SERVICES.get('$http').put(`${this.apiUrl}/categories/${id}`, params);
   }
 
   destroy(id) {
