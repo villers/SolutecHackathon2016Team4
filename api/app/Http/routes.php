@@ -12,26 +12,16 @@
 */
 
 Route::group(['middleware' => 'cors'], function () {
-
-    // Country list
+    // Country Routes
     Route::get('country', function () {
         return Response::json(App\Country::all(), 200, [], JSON_NUMERIC_CHECK);
     });
 
-    // Login Routes
-<<<<<<< Updated upstream
+    // Auth Routes
     Route::controller('authenticate', 'AuthenticateController');
-=======
 
-    Route::resource('authenticate', 'AuthenticateController');
-    Route::post('authenticate', 'AuthenticateController@authenticate');
+    // Upload Routes
     Route::post('upload', 'UploadController@upload');
-
-    // Register & validate Routes
-
-    Route::post('register', 'RegisterController@register');
-    Route::get('active_account/{token}', 'RegisterController@active_account');
->>>>>>> Stashed changes
 
     // CRUD Routes
     Route::resource('categories', 'CategoriesController');
