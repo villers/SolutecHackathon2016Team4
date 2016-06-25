@@ -15,21 +15,23 @@ Nom de la base de donnée : xetian
 | id             | integer       | AUTO_INCREMENT, UNSIGNED car ne peut pas être négatif |
 | type           | enum          | Enumerable, soit "candidate " ou "recruiter" |
 | points         | integer       | UNSIGNED car ne peut pas être négatif, 0 par défaut
-| first_name     | varchar       | 35 caractères max |
-| last_name      | varchar       | 35 caractères max |
-| login          | varchar       | UNIQUE, 15 caractères max |
-| email          | varchar       | UNIQUE, 255 caractères max |
-| password       | varchar       | 255 caractères max |
-| country        | string        | 70 caractères max |
-| city           | string        | 70 caractères max |
-| postal_code    | integer       | max 5 chiffres, UNSIGNED car ne peut pas être négatif et ZEROFILL pour compléter les zéros |
-| address_number | integer       | UNSIGNED car ne peut pas être négatif |
-| address        | string        | 70 caractères max
-| is_active      | boolean       | 0 par défaut
-| token_active   | string        | 255 caractères max
-| graduation     | string        | 255 caractères max
-| lang           | string        | 50 caractères max
-| can_drive      | boolean       | 0 par défaut
+| first_name       | string       | 35 caractères max |
+| last_name        | string       | 35 caractères max |
+| login            | string       | UNIQUE, 15 caractères max |
+| email            | string       | UNIQUE, 255 caractères max |
+| password         | string       | 255 caractères max |
+| country          | string        | 70 caractères max |
+| city             | string        | 70 caractères max |
+| postal_code      | integer       | max 5 chiffres, UNSIGNED car ne peut pas être négatif et ZEROFILL pour compléter les zéros |
+| address_number   | integer       | UNSIGNED car ne peut pas être négatif |
+| address          | string        | 70 caractères max
+| is_active        | boolean       | 0 par défaut
+| token_active     | string        | 255 caractères max
+| graduation       | string        | 255 caractères max
+| lang             | string        | 50 caractères max
+| can_drive        | boolean       | 0 par défaut
+| **phone_number** | string        | 20 caractères maximum
+| **picture**      | string        | 255 caractères maximum
 
 Faut-il des champs supplémentaires ? Laravel ajoutera created_at et updated_at si vous utilisez timestamp() dans les migrations.
 
@@ -38,7 +40,7 @@ Faut-il des champs supplémentaires ? Laravel ajoutera created_at et updated_at 
 | Field          | Type          | Constraint  |
 | ---------------|:-------------:| -----:|
 | id             | integer       | AUTO_INCREMENT, UNSIGNED car ne peut pas être négatif |
-| name           | varchar       | 35 caractères max |
+| name           | string        | 35 caractères max |
 
 ### jobs
 
