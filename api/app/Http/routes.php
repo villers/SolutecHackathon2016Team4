@@ -15,7 +15,7 @@ Route::get('/', function () {
 });
 
 
-Route::group(['prefix' => 'api'], function()
+Route::group(['middleware' => 'cors'], function()
 {
 
     // Login Routes
@@ -32,3 +32,5 @@ Route::group(['prefix' => 'api'], function()
 
 
 });
+
+
