@@ -1,6 +1,13 @@
-<md-content class="md-padding">
+<md-content class="md-padding" id="profil">
   <div layout="column">
     <h1 layout="row" layout-align="center center">Mon compte</h1>
+    <md-card id="profile-card">
+      <img ng-src="{{vm.api_url}}/avatar/{{vm.credentialsUpdate.picture }}"
+           title="{{ vm.credentialsUpdate.last_name }} {{ vm.credentialsUpdate.first_name }}"
+           class="md-card-image"
+           alt="{{ vm.credentialsUpdate.last_name }} {{ vm.credentialsUpdate.first_name }}">
+    </md-card>
+
 
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Profil">
@@ -8,7 +15,7 @@
       </md-tab>
       <md-tab label="Éditer">
         <div layout="row">
-          <md-card flex="50">
+          <md-card flex="70">
             <md-toolbar layout="row" class="md-hue-1">
               <div class="md-toolbar-tools">
                 <span>Mon Compte</span>
@@ -112,7 +119,7 @@
               </md-card>
             </md-content>
           </md-card>
-          <md-content flex="50">
+          <md-content flex="40">
             <form name="upload" layout="column">
               <lf-ng-md-file-input lf-placeholder="Avatar" lf-drag-and-drop-label="Drag & Drop" lf-browse-label="Selectionner" lf-remove-label="Supprimer" name="file" lf-files='vm.file' lf-api="vm.api" lf-required lf-filesize="10MB" lf-totalsize="20MB" lf-mimetype="image/*" drag preview></lf-ng-md-file-input>
               <div ng-messages="upload.files.$error" style="color:red;">
@@ -123,7 +130,6 @@
               </div>
               <md-button type="button" ng-disabled="upload.$invalid" class="md-raised md-primary" ng-click="vm.upload()">Valider</md-button>
             </form>
-            <img ng-src="{{vm.api_url}}/avatar/{{vm.credentialsUpdate.picture }}" class="md-card-image" style="float: right;" alt="image caption" width="200px">
           </md-content>
         </div>
       </md-tab>
