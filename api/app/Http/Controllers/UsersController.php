@@ -18,14 +18,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $user = User::all();
+        $users = User::all();
 
-        return response()->json(compact('user'));
-    }
-
-    public function getMe() {
-        $achievements =  Auth::user()->achievements;
-        return Response::json(compact('achievements'), 200, [], JSON_NUMERIC_CHECK);
+        return Response::json(compact('users'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
@@ -37,6 +32,10 @@ class UsersController extends Controller
         $user = User::findOrFail($request['user_id']);
 
         $user->achievements()->attach($request['achievements_id']);
+
+        $message = 'Le haut-fait a bien été ajouté !';
+
+        return Response::json(compact('message'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
@@ -48,7 +47,7 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return response()->json(compact('user'));
+        return Response::json(compact('user'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
@@ -67,7 +66,6 @@ class UsersController extends Controller
         $user->first_name = $request['first_name'];
         $user->login = $request['login'];
         $user->email = $request['email'];
-        $user->password = $request['password'];
         $user->country = $request['country'];
         $user->city = $request['city'];
         $user->postal_code = $request['postal_code'];
@@ -79,12 +77,16 @@ class UsersController extends Controller
         $user->graduation = $request['graduation'];
         $user->lang = $request['lang'];
         $user->can_drive = $request['can_drive'];
+        
+        if ($request['password']) {
+            $user->password = bcrypt($request['password']);
+        }
 
-        $message = "Success: User updated";
+        $message = 'L\'utilisateur a bien été édité !';
 
         $user->save();
 
-        return response()->json(compact('message', 'user'));
+        return Response::json(compact('message', 'user'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
@@ -98,6 +100,8 @@ class UsersController extends Controller
 
         $user->delete();
 
-        return response()->json(['status' => 'true', 'message' => 'Success: User deleted']);
+        $message = 'L\'utilisateur a bien été supprimé !';
+
+        return Response::json(compact('message', 'user'), 200, [], JSON_NUMERIC_CHECK);
     }
 }
