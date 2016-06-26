@@ -8,6 +8,7 @@ class Country
      * Get all country
      * @return array
      */
+    
     public static function all()
     {
         return [

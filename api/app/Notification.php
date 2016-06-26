@@ -16,6 +16,7 @@ class Notification extends Model
      * Belongs To Users
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+    
     public function users()
     {
         return $this->belongsTo('App\User');

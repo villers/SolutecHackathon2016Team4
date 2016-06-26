@@ -27,8 +27,8 @@ class UpdateAchievementRequest extends Request
     {
         return [
             "message" => "required|min:0|max:50",
-            "points" => "required|min:0|numeric",
-            "icon" => "required|min:0|max:25",
+            "points"  => "required|min:0|numeric",
+            "icon"    => "required|min:0|max:25",
         ];
     }
 

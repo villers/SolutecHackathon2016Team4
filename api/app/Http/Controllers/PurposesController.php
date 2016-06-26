@@ -45,12 +45,10 @@ class PurposesController extends Controller
     {
         $purpose = Purpose::create([
             'from_user_id' => $request['from_user_id'],
-            'to_user_id' => $request['to_user_id'],
-            'message' => $request['message'],
+            'to_user_id'   => $request['to_user_id'],
+            'message'      => $request['message'],
         ]);
-
         $message = 'La proposition a bien été crée';
-
         return Response::json(compact('message', 'purpose'), 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -66,15 +64,11 @@ class PurposesController extends Controller
     public function update(Request $request, $id)
     {
         $purpose = Purpose::findOrFail($id);
-
         $purpose->from_user_id = $request['from_user_id'];
-        $purpose->to_user_id = $request['to_user_id'];
-        $purpose->message = $request['message'];
-
+        $purpose->to_user_id   = $request['to_user_id'];
+        $purpose->message      = $request['message'];
         $purpose->save();
-
         $message = 'La proposition a bien été édité !';
-
         return Response::json(compact('message', 'proposition'), 200, [], JSON_NUMERIC_CHECK);
     }
 

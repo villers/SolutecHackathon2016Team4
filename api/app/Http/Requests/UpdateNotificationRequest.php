@@ -27,9 +27,9 @@ class UpdateNotificationRequest extends Request
     public function rules()
     {
         return [
-        "user_id" => "required|exists:users,id",
+        "user_id"  => "required|exists:users,id",
         "has_read" => "required|min:0",
-        "message" => "required|max:6000",
+        "message"  => "required|max:6000",
         ];
     }
 

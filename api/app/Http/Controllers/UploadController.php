@@ -17,18 +17,14 @@ class UploadController extends Controller
     {
         $id = $request->input('id');
         $destinationPath = 'avatar/';
-
         $user = User::findOrFail($id);
-
         array_map('unlink', glob("${destinationPath}*_{$id}.*"));
 
         // Avatar upload
         $file = $request->file('file');
         $fileName = uniqid() . '_' . $id . '.' . $file->getClientOriginalExtension();
         $file->move($destinationPath, $fileName);
-
         $user->picture = $fileName;
-
         $user->save();
     }
 
@@ -39,15 +35,11 @@ class UploadController extends Controller
     public function cv(Request $request)
     {
         $id = $request->input('id');
-
         $pdf = $request->file('pdf');
         $destinationPath = 'cv/';
         $fileName = $id . '.pdf';
-
         array_map('unlink', glob("${destinationPath}*_{$id}.*"));
-
         $pdf->move($destinationPath, $fileName);
-
         $user = User::findOrFail($id);
         $user->cv = $fileName;
         $user->save();
@@ -64,14 +56,12 @@ class UploadController extends Controller
         $destinationPath = 'cv/';
         $fileName = $id . '.pdf';
         $path = $destinationPath . $fileName;
-
         if (!file_exists($path)) {
             $fileName = 'default.pdf';
             $path = $destinationPath . $fileName;
         }
-
         return Response::make(file_get_contents($path), 200, [
-            'Content-Type'        => 'application/pdf',
+            'Content-Type' => 'application/pdf',
             'Content-Disposition' => 'inline; filename="' . $fileName . '"',
         ]);
     }
