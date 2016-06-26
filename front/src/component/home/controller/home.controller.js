@@ -13,6 +13,7 @@ class NetflixHome {
       .all()
       .then(res => {
         this.users = res.data;
+        console.log(this.users);
       });
   }
 }

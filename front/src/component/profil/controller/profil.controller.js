@@ -61,21 +61,21 @@ class Profil {
     SERVICES.get('usersService').upload(formData, {
       transformRequest: angular.identity,
       headers: { 'Content-Type': undefined },
-    }).then(() => {
-      this.api.removeAll();
-      this.sync();
+    })
+      .then(() => {
+        this.api.removeAll();
+        this.sync();
 
-      const toast = SERVICES.get('$mdToast').simple()
-        .textContent('Photos de profil bien ajoutée')
-        .highlightAction(true)
-        .highlightClass('md-accent')
-        .hideDelay(3000)
-        .position('bottom right');
+        const toast = SERVICES.get('$mdToast').simple()
+          .textContent('Photos de profil bien ajoutée')
+          .highlightAction(true)
+          .highlightClass('md-accent')
+          .hideDelay(3000)
+          .position('bottom right');
 
-      SERVICES.get('$mdToast').show(toast);
-    }, err => {
-      console.log(err);
-    });
+        SERVICES.get('$mdToast').show(toast);
+      })
+      .catch(err => console.log(err));
   }
 
   sync() {

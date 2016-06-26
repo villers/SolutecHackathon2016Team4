@@ -20,7 +20,7 @@ class UsersController extends Controller
     {
         $users = User::all();
 
-        return Response::json(compact('users'), 200, [], JSON_NUMERIC_CHECK);
+        return Response::json($users, 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
@@ -35,7 +35,7 @@ class UsersController extends Controller
 
         $message = 'Le haut-fait a bien été ajouté !';
 
-        return Response::json(compact('message'), 200, [], JSON_NUMERIC_CHECK);
+        return Response::json(compact('message', 'user'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
@@ -47,7 +47,7 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return Response::json(compact('user'), 200, [], JSON_NUMERIC_CHECK);
+        return Response::json($user, 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**

@@ -13,14 +13,14 @@ class SendMail extends Job
     /**
      * User Model.
      *
-     * @var App\Models\User
+     * @var \App\User
      */
     protected $user;
 
     /**
      * Create a new SendMailCommand instance.
      *
-     * @param  App\Models\User  $user
+     * @param  \App\User $user
      * @return void
      */
     public function __construct(User $user)
@@ -31,20 +31,19 @@ class SendMail extends Job
     /**
      * Execute the job.
      *
-     * @param  Mailer  $mailer
+     * @param  Mailer $mailer
      * @return void
      */
     public function handle(Mailer $mailer)
     {
         $data = [
-            'title'  => 'Un nouveau message',
-            'intro'  => 'Pour valider votre compte',
-            'link'   => 'cliquez ici pour valider',
-            'active_code' => $this->user['token_active']
+            'title'       => 'Activation de votre compte Xétian',
+            'intro'       => 'Pour valider votre compte Xétian et accéder à toutes les fonctionnalitées du site,',
+            'link'        => 'cliquez ici',
+            'active_code' => $this->user['token_active'],
         ];
 
-
-        $mailer->send('emails.auth.verify', $data, function($message) {
+        $mailer->send('emails.auth.verify', $data, function ($message) {
             $message->to($this->user['email'], $this->user['login'])
                 ->subject(trans('Vérifiez votre compte'));
         });
