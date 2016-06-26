@@ -1,3 +1,5 @@
+import angular from 'angular';
+
 const SERVICES = new Map();
 
 class Register {
@@ -9,7 +11,7 @@ class Register {
       .set('usersService', usersService);
 
     this.countries = [];
-    this.error = null;
+    this.error = [];
 
     this.credentials = {
       first_name: '',
@@ -45,7 +47,9 @@ class Register {
       SERVICES.get('$mdToast').show(toast);
       SERVICES.get('$state').go('login', {});
     }, (response) => {
-      this.error = response.error;
+      angular.forEach(response.data, error => {
+        this.error.push(error[0]);
+      });
     });
   }
 }

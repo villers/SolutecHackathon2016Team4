@@ -1,13 +1,10 @@
 <md-content class="md-padding">
   <div layout="row">
     <div flex="80" layout="column" class="cv-container">
-      <md-card class="cv-listener">
-        <md-card-content>
 
-          <!-- Template PDF -->
 
-        </md-card-content>
-      </md-card>
+          <iframe ng-src="{{vm.getPdf() }}" frameborder="0" height="{{vm.getHeight() }}" width="100%"></iframe>
+
     </div>
 
     <div flex="20" layout="column">
