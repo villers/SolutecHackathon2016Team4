@@ -14,7 +14,7 @@ angular
   .factory('configService', ConfigService.factory)
   .factory('achievementsService', AchievementsService.factory)
   .factory('categoriesService', CategoriesService.factory)
-  .factory('NotificationsService', NotificationsService.factory)
+  .factory('notificationsService', NotificationsService.factory)
   .factory('usersService', UsersService.factory)
   .factory('jobsService', JobsService.factory)
   .factory('configService', ConfigService.factory);
