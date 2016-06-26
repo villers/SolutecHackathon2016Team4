@@ -26,8 +26,8 @@ class Login {
         .hideDelay(3000)
         .position('bottom right');
 
-      SERVICES.get('$rootScope').currentUser = response.data;
-      SERVICES.get('store').set('currentUser', response.data);
+      SERVICES.get('$rootScope').currentUser = response.data.user;
+      SERVICES.get('store').set('currentUser', response.data.user);
 
       SERVICES.get('$mdToast').show(toast);
       SERVICES.get('$state').go('dashboard', {});
