@@ -1,15 +1,16 @@
 const SERVICES = new Map();
 
 class NetflixHome {
-  constructor($state, usersService, configService) {
+  constructor($state, usersService, configService, $rootScope) {
     SERVICES
       .set('$state', $state)
       .set('usersService', usersService)
       .set('configService', configService);
 
+    this.id = $rootScope.currentUser.id;
+
     this.users = [];
     this.api_url = SERVICES.get('configService').get('API_URL');
-    this.pdfUrl = '/pdf/relativity.pdf';
 
     SERVICES
       .get('usersService')
@@ -26,8 +27,16 @@ class NetflixHome {
         this.users = res.data.users;
       });
   }
+
+  getPdf() {
+    return `${this.api_url}/download?id=${this.id}`;
+  }
+
+  getHeight() {
+    return `${window.screen.height - 200}vh`;
+  }
 }
 
-NetflixHome.$inject = ['$state', 'usersService', 'configService'];
+NetflixHome.$inject = ['$state', 'usersService', 'configService', '$rootScope'];
 
 export default NetflixHome;
