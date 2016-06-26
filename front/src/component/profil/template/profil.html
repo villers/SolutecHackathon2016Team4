@@ -121,6 +121,7 @@
           </md-card>
           <md-content flex="40">
             <form name="upload" layout="column">
+              <h3>Photos de profil</h3>
               <lf-ng-md-file-input lf-placeholder="Avatar" lf-drag-and-drop-label="Drag & Drop" lf-browse-label="Selectionner" lf-remove-label="Supprimer" name="file" lf-files='vm.file' lf-api="vm.api" lf-required lf-filesize="10MB" lf-totalsize="20MB" lf-mimetype="image/*" drag preview></lf-ng-md-file-input>
               <div ng-messages="upload.files.$error" style="color:red;">
                 <div ng-message="required">Avatar requis.</div>
@@ -130,6 +131,22 @@
               </div>
               <md-button type="button" ng-disabled="upload.$invalid" class="md-raised md-primary" ng-click="vm.upload()">Valider</md-button>
             </form>
+            <br><br>
+            <md-divider></md-divider>
+
+            <form name="upload2" layout="column">
+              <h3>Votre CV</h3>
+
+              <lf-ng-md-file-input lf-placeholder="Uploader votre CV" lf-drag-and-drop-label="Drag & Drop" lf-browse-label="Selectionner" lf-remove-label="Supprimer" name="cv" lf-files='vm.cv' lf-api="vm.apicv" lf-required lf-filesize="10MB" lf-totalsize="20MB" lf-mimetype="application/pdf" drag preview></lf-ng-md-file-input>
+              <div ng-messages="upload2.files.$error" style="color:red;">
+                <div ng-message="required">Avatar requis.</div>
+                <div ng-message="filesize">Le fichier est trop lourd.</div>
+                <div ng-message="totalsize">Le fichier est trop lourd.</div>
+                <div ng-message="mimetype">Erreur de mimetype.</div>
+              </div>
+              <md-button type="button" ng-disabled="upload2.$invalid" class="md-raised md-primary" ng-click="vm.uploadcv()">Valider</md-button>
+            </form>
+
           </md-content>
         </div>
       </md-tab>
