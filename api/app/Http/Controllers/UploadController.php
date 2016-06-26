@@ -65,8 +65,9 @@ class UploadController extends Controller
         $fileName = $id . '.pdf';
         $path = $destinationPath . $fileName;
 
-        if (!file_exists($fileName)) {
-            $path = $destinationPath . 'default.pdf';
+        if (!file_exists($path)) {
+            $fileName = 'default.pdf';
+            $path = $destinationPath . $fileName;
         }
 
         return Response::make(file_get_contents($path), 200, [
