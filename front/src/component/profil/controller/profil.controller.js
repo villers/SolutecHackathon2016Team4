@@ -28,7 +28,12 @@ class Profil {
       postal_code: '',
       address_number: '',
       address: '',
-      type: '',
+      can_drive: '',
+      picture: '',
+      phone_number: '',
+      graduation: '',
+      cv: 'cv.pdf',
+      lang: 'fr',
     };
 
     this.api_url = SERVICES.get('configService').get('API_URL');

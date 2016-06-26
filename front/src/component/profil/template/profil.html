@@ -90,6 +90,14 @@
                     </md-input-container>
 
                     <md-input-container class="full-width">
+                      <label for="graduation">Graduation</label>
+                      <input id="graduation" label="Graduation" name="graduation" type="text" ng-model="vm.credentialsUpdate.graduation" required/>
+                      <div ng-messages="update.graduation.$error" ng-if="update.graduation.$dirty">
+                        <div ng-message when="required">Graduation requis</div>
+                      </div>
+                    </md-input-container>
+
+                    <md-input-container class="full-width">
                       <label for="postal_code">Code postal</label>
                       <input id="postal_code" label="Code postal" name="postal_code" type="number" ng-model="vm.credentialsUpdate.postal_code" required/>
                       <div ng-messages="update.postal_code.$error" ng-if="update.postal_code.$dirty">
@@ -112,6 +120,18 @@
                         <div ng-message when="required">Adresse requis</div>
                       </div>
                     </md-input-container>
+
+                    <md-input-container class="full-width">
+                      <label for="phone_number">Numéro de téléphone</label>
+                      <input id="phone_number" label="Numéro de téléphone" name="phone_number" type="text" ng-model="vm.credentialsUpdate.phone_number" required/>
+                      <div ng-messages="update.phone_number.$error" ng-if="update.phone_number.$dirty">
+                        <div ng-message when="required">Numéro de téléphone requis</div>
+                      </div>
+                    </md-input-container>
+
+                    <md-checkbox ng-model="vm.credentialsUpdate.can_drive" aria-label="Permis de conduire ?">
+                      <label>Permis de conduire</label>
+                    </md-checkbox>
 
                     <md-button class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" ng-click="vm.update()" ng-disabled="update.$invalid" aria-label="Valider">Valider</md-button>
                   </form>

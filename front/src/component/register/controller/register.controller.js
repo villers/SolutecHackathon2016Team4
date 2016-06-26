@@ -25,10 +25,13 @@ class Register {
       postal_code: '',
       address_number: '',
       address: '',
-      type: '',
+      can_drive: '',
+      picture: '',
+      phone_number: '',
+      graduation: '',
+      cv: 'cv.pdf',
+      lang: 'fr',
     };
-
-    this.types = ['candidate', 'recruiter'];
 
     SERVICES.get('usersService').country().then(countries => {
       this.countries = countries.data;
