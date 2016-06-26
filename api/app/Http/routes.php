@@ -35,4 +35,7 @@ Route::group(['middleware' => 'cors'], function () {
         Route::post('users/achievements', 'UsersController@storeAchievement');
         Route::get('user/achievements', 'UsersController@getMe');
     });
+
+     Route::resource('premium', 'ShopController');
+
 });

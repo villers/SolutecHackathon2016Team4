@@ -77,6 +77,8 @@ class UsersController extends Controller
         $user->graduation = $request['graduation'];
         $user->lang = $request['lang'];
         $user->can_drive = $request['can_drive'];
+        $user->premium = $request['premium'];
+        $user->date_premium = $request["date_premium"];
 
         if ($request['password']) {
             $user->password = bcrypt($request['password']);
