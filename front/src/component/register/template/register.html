@@ -85,6 +85,14 @@
           </md-input-container>
 
           <md-input-container class="full-width">
+            <label for="graduation">Graduation</label>
+            <input id="graduation" label="Graduation" name="graduation" type="text" ng-model="vm.credentials.graduation" required/>
+            <div ng-messages="register.graduation.$error" ng-if="register.graduation.$dirty">
+              <div ng-message when="required">Graduation requis</div>
+            </div>
+          </md-input-container>
+
+          <md-input-container class="full-width">
             <label for="postal_code">Code postal</label>
             <input id="postal_code" label="Code postal" name="postal_code" type="number" ng-model="vm.credentials.postal_code" required/>
             <div ng-messages="register.postal_code.$error" ng-if="register.postal_code.$dirty">
@@ -109,16 +117,16 @@
           </md-input-container>
 
           <md-input-container class="full-width">
-            <label for="type">Types</label>
-            <md-select id="type" ng-model="vm.credentials.type" aria-label="Types" required>
-              <md-option ng-repeat="type in vm.types" value="{{type}}">
-                {{type === 'candidate' ? 'Candidat' : 'Recruteur' }}
-              </md-option>
-            </md-select>
-            <div ng-messages="register.type.$error" ng-if="register.type.$dirty">
-              <div ng-message when="required">Type requis</div>
+            <label for="phone_number">Numéro de téléphone</label>
+            <input id="phone_number" label="Numéro de téléphone" name="phone_number" type="text" ng-model="vm.credentials.phone_number" required/>
+            <div ng-messages="register.phone_number.$error" ng-if="register.phone_number.$dirty">
+              <div ng-message when="required">Numéro de téléphone requis</div>
             </div>
           </md-input-container>
+
+          <md-checkbox ng-model="vm.credentials.can_drive" aria-label="Permis de conduire ?">
+            <label>Permis de conduire</label>
+          </md-checkbox>
 
           <md-button class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" ng-click="vm.register()" ng-disabled="register.$invalid" aria-label="S'inscrire">S'inscrire</md-button>
           <md-button class="md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" ui-sref="login" aria-label="Se connecter">Se connecter</md-button>
