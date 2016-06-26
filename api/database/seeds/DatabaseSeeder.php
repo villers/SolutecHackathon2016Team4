@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
@@ -79,6 +80,28 @@ class DatabaseSeeder extends Seeder
 
         $faker = Faker::create('fr_FR');
 
+        // Static user for test
+        DB::table('users')->insert([
+            'type' => $faker->randomElement($array = array('candidate', 'recruiter')),
+            'points' => $faker->numberBetween($min = 0, $max = 9000),
+            'last_name' => 'titi',
+            'first_name' => 'titi',
+            'login' => 'titi',
+            'email' => 'titi@titi.fr',
+            'password' => bcrypt('titi'),
+            'country' => 'France',
+            'city' => $faker->city,
+            'postal_code' => $faker->postcode,
+            'address_number' => $faker->buildingNumber,
+            'address' => trim(preg_replace('/[0-9]|,+/', '', $faker->streetAddress)),
+            'is_active' => 1,
+            'token_active' => bin2hex(random_bytes(20)),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'graduation' => $faker->randomElement($graduations),
+            'lang' => 'fr',
+            'can_drive' => $faker->randomElement($array = array(0, 1)),
+        ]);
         //Seed for users
 
         for ($i = 0; $i < $nb_users; $i++) {
@@ -147,13 +170,20 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        /*
-        DB::table('achievements')->insert([
-            'message' => 'Félicitations vous avez accompli le haut fait "Super recruteur !"',
-            'points' => 100,
-            'icon' => '3D_rotation',
-            'created_at' => date('Y-m-d h:m:s'),
-        ]);
-        */
+        for ($i = 1; $i < 3; $i++) {
+            DB::table('achievements')->insert([
+                'message' => 'Acivements' . $i,
+                'points' => 100,
+                'icon' => '3D_rotation',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]);
+        }
+
+        $user = User::findOrFail(1);
+        $user->achievements()->attach(1);
+        $user->achievements()->attach(2);
+
+
     }
 }

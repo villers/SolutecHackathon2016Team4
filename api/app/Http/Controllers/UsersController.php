@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Achievement;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests;
 
@@ -20,6 +21,11 @@ class UsersController extends Controller
         $user = User::all();
 
         return response()->json(compact('user'));
+    }
+
+    public function getMe() {
+        $achievements =  Auth::user()->achievements;
+        return Response::json(compact('achievements'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**

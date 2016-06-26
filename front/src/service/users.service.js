@@ -9,6 +9,10 @@ class UsersService {
     this.apiUrl = SERVICES.get('configService').get('API_URL');
   }
 
+  me() {
+    return SERVICES.get('$http').get(`${this.apiUrl}/authenticate/me`);
+  }
+
   all() {
     return SERVICES.get('$http').get(`${this.apiUrl}/users`);
   }

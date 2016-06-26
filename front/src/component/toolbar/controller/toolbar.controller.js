@@ -1,11 +1,14 @@
 const SERVICES = new Map();
 
 class Toolbar {
-  constructor($state) {
+  constructor($state, $auth) {
     SERVICES.set('$state', $state);
+    SERVICES.set('$auth', $auth);
+
+    this.isAuthenticated = () => $auth.isAuthenticated();
   }
 }
 
-Toolbar.$inject = ['$state'];
+Toolbar.$inject = ['$state', '$auth'];
 
 export default Toolbar;
