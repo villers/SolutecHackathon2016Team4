@@ -1,4 +1,4 @@
-<md-content class="md-padding">
+<md-content class="md-padding" id="notifications">
   <md-card>
     <md-toolbar layout="row" class="md-hue-1">
       <div class="md-toolbar-tools">
@@ -8,10 +8,10 @@
     <md-content layout="row" flex>
       <md-list flex>
         <!-- Notification -->
-        <md-list-item class="md-3-line md-long-text" ng-repeat="notification in vm.notifications">
+        <md-list-item class="md-3-line md-long-text" ng-repeat="notification in vm.notifications" ng-mouseover="vm.update(notification.id)">
           <md-icon md-font-icon="zmdi {{ notification.has_read === 0 ? 'zmdi-circle-o' : 'zmdi-check-circle' }} zmdi-hc-2x"></md-icon>
           <div class="md-list-item-text">
-            <p>{{ notification.created_at }}</p>
+            <p>{{ notification.created_at}}</p>
             <h3>{{ notification.message }}</h3>
           </div>
           <md-divider></md-divider>
