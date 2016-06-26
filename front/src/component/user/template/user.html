@@ -1,0 +1,144 @@
+<md-content class="md-padding">
+  <div layout="column">
+    <h1 layout="row" layout-align="center center">Mon compte</h1>
+
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="Profil">
+        <achievements></achievements>
+      </md-tab>
+      <md-tab label="Éditer">
+        <div layout="row">
+          <md-card flex="50">
+            <md-toolbar layout="row" class="md-hue-1">
+              <div class="md-toolbar-tools">
+                <span>Mon Compte</span>
+              </div>
+            </md-toolbar>
+            <md-content layout="row" flex>
+              <md-card>
+                <md-toolbar class="md-warn" ng-if="vm.error">
+                  <div class="md-toolbar-tools">
+                    <h2 class="md-flex">{{vm.error}}</h2>
+                  </div>
+                </md-toolbar>
+
+                <md-content class="md-padding">
+                  <form name="update">
+                    <md-input-container class="full-width">
+                      <label for="last_name">Nom</label>
+                      <input id="last_name" label="Nom" name="last_name" type="text" ng-model="vm.credentialsUpdate.last_name" required/>
+                      <div ng-messages="update.last_name.$error" ng-if="update.last_name.$dirty">
+                        <div ng-message when="required">Nom requis</div>
+                      </div>
+                    </md-input-container>
+
+                    <md-input-container class="full-width">
+                      <label for="first_name">Prénom</label>
+                      <input id="first_name" label="Prénom" name="first_name" type="text" ng-model="vm.credentialsUpdate.first_name" required/>
+                      <div ng-messages="update.first_name.$error" ng-if="update.first_name.$dirty">
+                        <div ng-message when="required">Prénom requis</div>
+                      </div>
+                    </md-input-container>
+
+                    <md-input-container class="full-width">
+                      <label for="login">Identifiant</label>
+                      <input id="login" label="Identifiant" name="login" type="text" ng-model="vm.credentialsUpdate.login" required/>
+                      <div ng-messages="update.login.$error" ng-if="update.login.$dirty">
+                        <div ng-message when="required">Identifiant requis</div>
+                      </div>
+                    </md-input-container>
+
+                    <md-input-container class="full-width">
+                      <label for="email">Email</label>
+                      <input id="email" label="Email" name="email" type="email" ng-model="vm.credentialsUpdate.email" required/>
+                      <div ng-messages="update.email.$error" ng-if="update.email.$dirty">
+                        <div ng-message when="required">Email requis</div>
+                        <div ng-message when="email">Email non valide</div>
+                      </div>
+                    </md-input-container>
+
+                    <md-input-container class="full-width">
+                      <label for="password">Mot de passe</label>
+                      <input  id="password" label="Password" name="password" type="password" ng-model="vm.credentialsUpdate.password"/>
+                    </md-input-container>
+
+                    <md-input-container class="full-width">
+                      <label for="country">Pays</label>
+                      <md-select id="country" ng-model="vm.credentialsUpdate.country" aria-label="Pays">
+                        <md-option ng-repeat="country in vm.countries" value="{{country[2]}}">
+                          {{country[3]}}
+                        </md-option>
+                      </md-select>
+                      <div ng-messages="update.country.$error" ng-if="update.country.$dirty">
+                        <div ng-message when="required">Pays requis</div>
+                      </div>
+                    </md-input-container>
+
+                    <md-input-container class="full-width">
+                      <label for="city">Ville</label>
+                      <input id="city" label="Ville" name="city" type="text" ng-model="vm.credentialsUpdate.city" required/>
+                      <div ng-messages="update.city.$error" ng-if="update.city.$dirty">
+                        <div ng-message when="required">Ville requis</div>
+                      </div>
+                    </md-input-container>
+
+                    <md-input-container class="full-width">
+                      <label for="postal_code">Code postal</label>
+                      <input id="postal_code" label="Code postal" name="postal_code" type="number" ng-model="vm.credentialsUpdate.postal_code" required/>
+                      <div ng-messages="update.postal_code.$error" ng-if="update.postal_code.$dirty">
+                        <div ng-message when="required">Code postal requis</div>
+                      </div>
+                    </md-input-container>
+
+                    <md-input-container class="full-width">
+                      <label for="address_number">Numéro de rue</label>
+                      <input id="address_number" label="Numéro de rue" name="address_number" type="number" ng-model="vm.credentialsUpdate.address_number" required/>
+                      <div ng-messages="update.address_number.$error" ng-if="update.address_number.$dirty">
+                        <div ng-message when="required">Numéro de rue requis</div>
+                      </div>
+                    </md-input-container>
+
+                    <md-input-container class="full-width">
+                      <label for="address">Adresse</label>
+                      <input id="address" label="Adresse" name="address" type="text" ng-model="vm.credentialsUpdate.address" required/>
+                      <div ng-messages="update.address.$error" ng-if="update.address.$dirty">
+                        <div ng-message when="required">Adresse requis</div>
+                      </div>
+                    </md-input-container>
+
+                    <md-input-container class="full-width">
+                      <label for="type">Types</label>
+                      <md-select id="type" ng-model="vm.credentialsUpdate.type" aria-label="Types">
+                        <md-option ng-repeat="type in vm.types" value="{{type}}">
+                          {{type === 'candidate' ? 'Candidat' : 'Recruteur' }}
+                        </md-option>
+                      </md-select>
+                      <div ng-messages="update.type.$error" ng-if="update.type.$dirty">
+                        <div ng-message when="required">Type requis</div>
+                      </div>
+                    </md-input-container>
+
+                    <md-button class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" ng-click="vm.update()" ng-disabled="update.$invalid" aria-label="Valider">Valider</md-button>
+                  </form>
+                </md-content>
+              </md-card>
+            </md-content>
+          </md-card>
+          <md-content flex="50">
+            <form name="upload" layout="column">
+              <lf-ng-md-file-input lf-placeholder="Avatar" lf-drag-and-drop-label="Drag & Drop" lf-browse-label="Selectionner" lf-remove-label="Supprimer" name="file" lf-files='vm.file' lf-api="vm.api" lf-required lf-filesize="10MB" lf-totalsize="20MB" lf-mimetype="image/*" drag preview></lf-ng-md-file-input>
+              <div ng-messages="upload.files.$error" style="color:red;">
+                <div ng-message="required">Avatar requis.</div>
+                <div ng-message="filesize">Le fichier est trop lourd.</div>
+                <div ng-message="totalsize">Le fichier est trop lourd.</div>
+                <div ng-message="mimetype">Erreur de mimetype.</div>
+              </div>
+              <md-button type="button" ng-disabled="upload.$invalid" class="md-raised md-primary" ng-click="vm.upload()">Valider</md-button>
+            </form>
+            <img ng-src="{{vm.api_url}}/avatar/{{vm.credentialsUpdate.picture }}" class="md-card-image" style="float: right;" alt="image caption" width="200px">
+          </md-content>
+        </div>
+      </md-tab>
+    </md-tabs>
+  </div>
+</md-content>
