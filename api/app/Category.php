@@ -16,8 +16,4 @@ class Category extends Model
      * Category belong to Job
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function jobs()
-    {
-        return $this->belongsTo('App\Job');
-    }
 }
