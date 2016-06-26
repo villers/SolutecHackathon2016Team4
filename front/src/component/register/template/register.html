@@ -112,7 +112,7 @@
             <label for="type">Types</label>
             <md-select id="type" ng-model="vm.credentials.type" aria-label="Types" required>
               <md-option ng-repeat="type in vm.types" value="{{type}}">
-                {{type}}
+                {{type === 'candidate' ? 'Candidat' : 'Recruteur' }}
               </md-option>
             </md-select>
             <div ng-messages="register.type.$error" ng-if="register.type.$dirty">

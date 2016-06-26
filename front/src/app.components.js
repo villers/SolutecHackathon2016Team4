@@ -6,6 +6,7 @@ import Register from './component/register/register.component';
 import Home from './component/home/home.component';
 import Profil from './component/profil/profil.component';
 import Achievements from './component/achievements/achievements.component';
+import Notifications from './component/notifications/notifications.component';
 
 const moduleName = 'app.components';
 
@@ -16,6 +17,7 @@ angular
     .component('register', Register)
     .component('home', Home)
     .component('profil', Profil)
-    .component('achievements', Achievements);
+    .component('achievements', Achievements)
+    .component('notifications', Notifications);
 
 export default moduleName;

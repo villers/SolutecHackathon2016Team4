@@ -1,0 +1,23 @@
+<md-content class="md-padding">
+  <md-card>
+    <md-toolbar layout="row" class="md-hue-1">
+      <div class="md-toolbar-tools">
+        <span>Vos dernières notifications</span>
+      </div>
+    </md-toolbar>
+    <md-content layout="row" flex>
+      <md-list flex>
+        <!-- Notification -->
+        <md-list-item class="md-3-line md-long-text" ng-repeat="notification in vm.notifications">
+          <md-icon md-font-icon="zmdi {{ notification.has_read === 0 ? 'zmdi-circle-o' : 'zmdi-check-circle' }} zmdi-hc-2x"></md-icon>
+          <div class="md-list-item-text">
+            <p>{{ notification.created_at }}</p>
+            <h3>{{ notification.message }}</h3>
+          </div>
+          <md-divider></md-divider>
+        </md-list-item>
+        <!-- end Notification -->
+      </md-list>
+    </md-content>
+  </md-card>
+</md-content>

@@ -10,24 +10,36 @@ use App\User;
 
 class UploadController extends Controller 
 {
-	public function upload()
+	public function avatar(Request $request)
 	{
-		$id = 2;
+		$id= $request->input('id');
 
+		//Avatar upload
+		$file = $request->file('file');
 		$destinationPath = 'avatar/';
-
-		$base64 = Input::get('base64');
-
-		$imageData = base64_decode($base64);
-		$source = imagecreatefromstring($imageData);
-		$rotate = imagerotate($source, 0, 0);
-		$imageSave = imagejpeg($rotate, $destinationPath.$id.'.jpg',100);
-		imagedestroy($source);
+		$fileName = $id . '.' . $file->getClientOriginalExtension();
+		$file->move($destinationPath, $fileName);
 
 		$user = User::findOrFail($id);
 
-		$user->picture = $destinationPath.$id.'.jpg';
+		$user->picture = $fileName;
 
+		$user->save();
+	}
+
+	public function cv(Request $request)
+	{
+		$id= $request->input('id');
+
+		//PDF upload
+		$pdf = $request->file('pdf');
+		$destinationPath = 'cv/';
+		$fileName = $id . '.pdf';
+		$pdf->move($destinationPath, $fileName);
+
+		//Add it to bdd
+		$user = User::findOrFail($id);
+		$user->cv = $fileName;
 		$user->save();
 	}
 }

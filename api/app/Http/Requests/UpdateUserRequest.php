@@ -6,8 +6,7 @@ use App\Http\Requests\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Support\Facades\Input;
 
-
-class CreateUserRequest extends Request
+class UpdateUserRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +25,11 @@ class CreateUserRequest extends Request
      */
     public function rules()
     {
+        $id = $this->segment(2);
+
         return [
-            "login"                 => "unique:users,login|required|max:15",
-            "email"                 => "unique:users,email|required|max:255",
+            "login"                 => "unique:users,login, " . $id . "|required|max:15",
+            "email"                 => "unique:users,email," . $id . "|required|max:255",
             "first_name"            => "required|max:35",
             "last_name"             => "required|max:35",
             "password"              => "required|max:255|confirmed",
