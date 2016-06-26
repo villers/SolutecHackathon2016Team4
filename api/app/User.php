@@ -40,6 +40,6 @@ class User extends Authenticatable
 
     public function votes()
     {
-        return $this->hasMany('App\Vote');
+        return $this->hasMany('App\Vote', 'from_user_id');
     }
 }
