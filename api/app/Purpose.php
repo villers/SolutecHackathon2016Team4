@@ -14,6 +14,6 @@ class Purpose extends Model
 
 	public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'to_user_id');
     }
 }

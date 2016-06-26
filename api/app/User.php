@@ -9,8 +9,8 @@ class User extends Authenticatable
     // The attributes that are mass assignable.
     protected $fillable = [
         'points', 'last_name', 'first_name', 'login', 'email', 'password', 'country',
-        'city', 'postal_code', 'adresse_number', 'adress', 'is_active', 'token_active', 'graduation',
-        'lang', 'can_drive', 'phone_number', 'picture', 'premium', 'date_premium'
+        'city', 'postal_code', 'address_number', 'address', 'is_active', 'token_active', 'graduation',
+        'lang', 'can_drive', 'phone_number', 'picture', 'premium', 'date_premium', 'cv',
     ];
 
     protected $hidden = [
@@ -35,7 +35,7 @@ class User extends Authenticatable
 
     public function purposes()
     {
-        return $this->hasMany('App\Purpose');
+        return $this->hasMany('App\Purpose', 'from_user_id');
     }
 
     public function votes()

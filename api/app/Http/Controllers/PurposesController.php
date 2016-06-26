@@ -92,14 +92,4 @@ class PurposesController extends Controller
         $message = 'La proposition a bien été supprimé !';
         return Response::json(compact('message', 'proposition'), 200, [], JSON_NUMERIC_CHECK);
     }
-
-
-    public function AllPurposes($id)
-    {
-      $purpose = Purpose::where('to_user_id', $id)
-        ->get();
-
-      return Response::json(compact('purpose'), 200, [], JSON_NUMERIC_CHECK);
-
-    }
 }
