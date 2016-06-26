@@ -2,19 +2,32 @@
   <div layout="row">
     <div flex="80" layout="column" class="cv-container">
       <md-card class="cv-listener">
-        <h2>Espace employé</h2>
         <md-card-content>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus at illo vel. Beatae blanditiis cumque cupiditate deleniti doloremque inventore iste molestiae neque, non odio officia, quis ratione repellendus, velit.</p>
+
+          <!-- Template PDF -->
+
         </md-card-content>
       </md-card>
     </div>
 
     <div flex="20" layout="column">
       <md-card ng-repeat="user in vm.users">
-        <h2>{{ user.login }}</h2>
-        <md-card-content>
-          <p>{{ user.last_name }}</p>
-        </md-card-content>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">
+              <img ng-src="{{ user.picture }}" class="md-card-image" alt="Avatar">
+            </span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <p> {{ user.first_name }} {{ user.last_name }}</p>
+          <md-button class="md-icon-button" aria-label="Voir le profil">
+            <md-icon md-font-library="material-icons">tag_faces</md-icon>
+          </md-button>
+          <md-button class="md-icon-button" aria-label="Détails du CV">
+            <md-icon md-font-library="material-icons">details</md-icon>
+          </md-button>
+        </md-card-actions>
       </md-card>
     </div>
   </div>

@@ -18,7 +18,7 @@ class Login {
   }
 
   login() {
-    SERVICES.get('$auth').login(this.credentials).then((response) => {
+    SERVICES.get('$auth').login(this.credentials).then(response => {
       const toast = SERVICES.get('$mdToast').simple()
         .textContent('Connecté')
         .highlightAction(true)

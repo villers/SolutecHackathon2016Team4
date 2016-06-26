@@ -32,6 +32,10 @@ module.exports = {
         loaders: ['html'],
       },
       {
+        test: /\.json/,
+        loaders: ['json'],
+      },
+      {
         test: /\.js$/,
         loader: 'babel',
         include: root,
