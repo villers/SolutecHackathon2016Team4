@@ -16,6 +16,8 @@
         <md-card-actions layout="row" layout-align="end center">
           <p> {{ user.first_name }} {{ user.last_name }}</p>
           <md-button class="md-icon-button" aria-label="Voir le profil">
+            <md-icon md-font-library="material-icons"  ng-click="vm.showPrompt($event, user.id)">comment</md-icon>
+          </md-button><md-button class="md-icon-button" aria-label="Voir le profil">
             <md-icon md-font-library="material-icons">tag_faces</md-icon>
           </md-button>
           <md-button class="md-icon-button" aria-label="Détails du CV">
