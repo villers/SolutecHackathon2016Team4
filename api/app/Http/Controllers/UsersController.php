@@ -60,7 +60,6 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $user->type = $request['type'];
         $user->points = $request['points'];
         $user->last_name = $request['last_name'];
         $user->first_name = $request['first_name'];
