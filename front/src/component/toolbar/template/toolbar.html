@@ -6,8 +6,7 @@
     </a>
   </h2>
 
-
-  <md-button class="md-icon-button" aria-label="Uploader votre CV">
+  <md-button ng-if="vm.isAuthenticated()" class="md-icon-button" aria-label="Uploader votre CV">
     <md-icon md-font-library="material-icons">cloud_upload</md-icon>
   </md-button>
 

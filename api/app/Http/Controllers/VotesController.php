@@ -46,7 +46,8 @@ class VotesController extends Controller
     {
         $vote = Vote::findOrFail($id);
 
-        $vote->user_id = $request['user_id'];
+        $vote->from_user_id = $request['from_user_id'];
+        $vote->to_user_id = $request['to_user_id'];
         $vote->note = $request['note'];
 
         $vote->save();
@@ -65,7 +66,8 @@ class VotesController extends Controller
     public function store(Requests\CreateVoteRequest $request)
     {
         $vote = Vote::create([
-            'user_id' => $request['user_id'],
+            'from_user_id' => $request['from_user_id'],
+            'to_user_id' => $request['to_user_id'],
             'note'    => $request['note'],
         ]);
 

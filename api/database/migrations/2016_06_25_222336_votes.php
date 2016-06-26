@@ -15,7 +15,8 @@ class Votes extends Migration
         Schema::create('votes', function($table)
         {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->integer('from_user_id')->unsigned();
+            $table->integer('to_user_id')->unsigned();
             $table->enum('note',[1,2,3,4,5])->default(1);
             $table->timestamps();
         });

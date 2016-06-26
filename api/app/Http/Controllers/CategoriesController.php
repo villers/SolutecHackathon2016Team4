@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Response;
+use DB;
 
 
 class CategoriesController extends Controller
@@ -17,6 +18,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
+        
         $categories = Category::all();
 
         return Response::json(compact('categories'),200, [], JSON_NUMERIC_CHECK);

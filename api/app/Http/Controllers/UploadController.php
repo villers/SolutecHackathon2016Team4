@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
+use Illuminate\Support\Facades\Response;
 
 class UploadController extends Controller
 {
@@ -50,5 +51,27 @@ class UploadController extends Controller
         $user = User::findOrFail($id);
         $user->cv = $fileName;
         $user->save();
+    }
+
+    /**
+     * CV Download
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function download(Request $request)
+    {
+        $id = $request->input('id');
+        $destinationPath = 'cv/';
+        $fileName = $id . '.pdf';
+        $path = $destinationPath . $fileName;
+
+        if (!file_exists($fileName)) {
+            $path = $destinationPath . 'default.pdf';
+        }
+
+        return Response::make(file_get_contents($path), 200, [
+            'Content-Type'        => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . $fileName . '"',
+        ]);
     }
 }

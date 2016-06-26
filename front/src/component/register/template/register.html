@@ -7,10 +7,10 @@
         </div>
       </md-toolbar>
 
-      <md-toolbar class="md-warn" ng-if="vm.error">
-        <div class="md-toolbar-tools">
-          <h2 class="md-flex">{{vm.error}}</h2>
-        </div>
+      <md-toolbar class="md-warn" ng-if="vm.error.length != 0">
+            <ul ng-repeat="error in vm.error">
+              <li>{{error}}</li>
+            </ul>
       </md-toolbar>
 
       <md-content class="md-padding">

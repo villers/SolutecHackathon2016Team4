@@ -19,13 +19,13 @@ Route::group(['middleware' => 'cors'], function () {
 
     // Authenticated Routes
     Route::controller('authenticate', 'AuthenticateController');
+    Route::get('download', 'UploadController@download');
 
     // Upload Routes
     Route::group(['middleware' => 'jwt.auth'], function () {
         // CRUD Routes
         Route::post('upload/cv', 'UploadController@cv');
         Route::post('upload/avatar', 'UploadController@avatar');
-        Route::resource('categories', 'CategoriesController');
         Route::resource('jobs', 'JobsController');
         Route::resource('notifications', 'NotificationsController');
         Route::resource('achievements', 'AchievementsController');
@@ -34,8 +34,7 @@ Route::group(['middleware' => 'cors'], function () {
         Route::resource('purposes', 'PurposesController');
         Route::post('users/achievements', 'UsersController@storeAchievement');
         Route::get('user/achievements', 'UsersController@getMe');
+        Route::resource('premium', 'ShopController');
+        Route::resource('categories', 'CategoriesController');
     });
-
-     Route::resource('premium', 'ShopController');
-
 });

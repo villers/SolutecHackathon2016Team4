@@ -7,7 +7,6 @@ import aria from 'angular-aria';
 import messages from 'angular-messages';
 import satellizer from 'satellizer';
 
-// use special upload
 require('lf-ng-md-file-input');
 
 import services from './app.services';
@@ -35,7 +34,8 @@ angular
     components,
     directives,
   ])
-  .config(($stateProvider, $locationProvider, $urlRouterProvider, $authProvider, storeProvider) => {
+  .config(($stateProvider, $locationProvider, $urlRouterProvider,
+           $authProvider, storeProvider, $sceDelegateProvider) => {
     $locationProvider.html5Mode(true);
 
     // Redirect to default state if any other states
@@ -54,6 +54,8 @@ angular
 
     // Configure default SessionStorage
     storeProvider.setStore('sessionStorage');
+
+    $sceDelegateProvider.resourceUrlWhitelist(['**']);
   })
   .run(($auth, $rootScope, store) => {
     if ($auth.isAuthenticated()) {

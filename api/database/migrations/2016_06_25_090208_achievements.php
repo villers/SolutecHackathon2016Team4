@@ -15,7 +15,7 @@ class Achievements extends Migration
         Schema::create('achievements', function($table)
         {
             $table->increments('id');
-            $table->string('message',50);
+            $table->string('message',255);
             $table->integer('points')->unsigned();
             $table->string('icon',25);
             $table->timestamps();

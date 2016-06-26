@@ -1,13 +1,6 @@
-<md-content class="md-padding" id="profil">
+<md-content class="md-padding">
   <div layout="column">
     <h1 layout="row" layout-align="center center">Mon compte</h1>
-    <md-card id="profile-card">
-      <img ng-src="{{vm.api_url}}/avatar/{{vm.credentialsUpdate.picture }}"
-           title="{{ vm.credentialsUpdate.last_name }} {{ vm.credentialsUpdate.first_name }}"
-           class="md-card-image"
-           alt="{{ vm.credentialsUpdate.last_name }} {{ vm.credentialsUpdate.first_name }}">
-    </md-card>
-
 
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Profil">
@@ -15,7 +8,7 @@
       </md-tab>
       <md-tab label="Éditer">
         <div layout="row">
-          <md-card flex="70">
+          <md-card flex="50">
             <md-toolbar layout="row" class="md-hue-1">
               <div class="md-toolbar-tools">
                 <span>Mon Compte</span>
@@ -113,13 +106,25 @@
                       </div>
                     </md-input-container>
 
+                    <md-input-container class="full-width">
+                      <label for="type">Types</label>
+                      <md-select id="type" ng-model="vm.credentialsUpdate.type" aria-label="Types">
+                        <md-option ng-repeat="type in vm.types" value="{{type}}">
+                          {{type === 'candidate' ? 'Candidat' : 'Recruteur' }}
+                        </md-option>
+                      </md-select>
+                      <div ng-messages="update.type.$error" ng-if="update.type.$dirty">
+                        <div ng-message when="required">Type requis</div>
+                      </div>
+                    </md-input-container>
+
                     <md-button class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" ng-click="vm.update()" ng-disabled="update.$invalid" aria-label="Valider">Valider</md-button>
                   </form>
                 </md-content>
               </md-card>
             </md-content>
           </md-card>
-          <md-content flex="40">
+          <md-content flex="50">
             <form name="upload" layout="column">
               <lf-ng-md-file-input lf-placeholder="Avatar" lf-drag-and-drop-label="Drag & Drop" lf-browse-label="Selectionner" lf-remove-label="Supprimer" name="file" lf-files='vm.file' lf-api="vm.api" lf-required lf-filesize="10MB" lf-totalsize="20MB" lf-mimetype="image/*" drag preview></lf-ng-md-file-input>
               <div ng-messages="upload.files.$error" style="color:red;">
@@ -130,6 +135,7 @@
               </div>
               <md-button type="button" ng-disabled="upload.$invalid" class="md-raised md-primary" ng-click="vm.upload()">Valider</md-button>
             </form>
+            <img ng-src="{{vm.api_url}}/avatar/{{vm.credentialsUpdate.picture }}" class="md-card-image" style="float: right;" alt="image caption" width="200px">
           </md-content>
         </div>
       </md-tab>

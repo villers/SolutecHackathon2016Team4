@@ -37,17 +37,17 @@ class PurposesController extends Controller
 
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function store(Requests\CreatePurposeRequest $request)
     {
         $purpose = Purpose::create([
-            'from_user_id'         => $request['from_user_id'],
-            'to_user_id'     => $request['to_user_id'],
-            'message'     => $request['message'],
-            ]);
+            'from_user_id' => $request['from_user_id'],
+            'to_user_id' => $request['to_user_id'],
+            'message' => $request['message'],
+        ]);
 
         $message = 'La proposition a bien été crée';
 
@@ -56,37 +56,37 @@ class PurposesController extends Controller
 
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request $request
-    * @param  int $id
-    * @return \Illuminate\Http\Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
 
     public function update(Request $request, $id)
     {
-       $purpose = Purpose::findOrFail($id);
+        $purpose = Purpose::findOrFail($id);
 
-       $purpose->from_user_id = $request['from_user_id'];
-       $purpose->to_user_id = $request['to_user_id'];
-       $purpose->message = $request['message'];
+        $purpose->from_user_id = $request['from_user_id'];
+        $purpose->to_user_id = $request['to_user_id'];
+        $purpose->message = $request['message'];
 
-       $purpose->save();
+        $purpose->save();
 
-       $message = 'La proposition a bien été édité !';
+        $message = 'La proposition a bien été édité !';
 
-       return Response::json(compact('message', 'proposition'), 200, [], JSON_NUMERIC_CHECK);
-   }
+        return Response::json(compact('message', 'proposition'), 200, [], JSON_NUMERIC_CHECK);
+    }
 
 
-     /**
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-     public function destroy($id)
-     {
+    public function destroy($id)
+    {
         $purpose = Purpose::findOrFail($id);
         $purpose->delete();
         $message = 'La proposition a bien été supprimé !';
