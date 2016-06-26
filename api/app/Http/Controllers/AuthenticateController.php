@@ -63,27 +63,27 @@ class AuthenticateController extends Controller
         $confirmation_code = str_random(30);
 
         $user = User::create([
-            'first_name'        => $request['first_name'],
-            'last_name'         => $request['last_name'],
-            'login'             => $request['login'],
-            'email'             => $request['email'],
-            'password'          => \Hash::make($request['password']),
-            'country'           => $request['country'],
-            'city'              => $request['city'],
-            'postal_code'       => $request['postal_code'],
-            'address_number'    => $request['address_number'],
-            'address'           => $request['address'],
-            'is_active'         => 0,
-            'token_active'      => $confirmation_code,
+            'first_name'     => $request['first_name'],
+            'last_name'      => $request['last_name'],
+            'login'          => $request['login'],
+            'email'          => $request['email'],
+            'password'       => \Hash::make($request['password']),
+            'country'        => $request['country'],
+            'city'           => $request['city'],
+            'postal_code'    => $request['postal_code'],
+            'address_number' => $request['address_number'],
+            'address'        => $request['address'],
+            'is_active'      => 0,
+            'token_active'   => $confirmation_code,
 
 
             //  ++++++++  Modifications a partir d'ici (ci dessous) ++++++++++++
 
 
-            'graduation'        => $request['graduation'],
-            'lang'              => $request['lang'],
-            'can_drive'         => $request['can_drive'],
-            'phone_number'      => $request['phone_number'],
+            'graduation'   => $request['graduation'],
+            'lang'         => $request['lang'],
+            'can_drive'    => $request['can_drive'],
+            'phone_number' => $request['phone_number'],
         ]);
 
         /*
@@ -122,6 +122,8 @@ class AuthenticateController extends Controller
      */
     public function getMe()
     {
-        return Response::json(Auth::user()->with('achievements', 'notifications', 'votes')->firstOrFail(), 200, [], JSON_NUMERIC_CHECK);
+        $user = Auth::user()->with('achievements', 'notifications', 'votes')->get();
+
+        return Response::json($user[Auth::user()->id - 1], 200, [], JSON_NUMERIC_CHECK);
     }
 }
