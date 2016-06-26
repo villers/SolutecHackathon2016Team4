@@ -5,7 +5,7 @@
     </div>
 
     <div flex="20" layout="column">
-      <md-card ng-repeat="user in vm.users" ng-click="vm.selectedId(user.id)">
+      <md-card ng-repeat="user in vm.users | orderBy:'-id'" ng-click="vm.selectedId(user.id)">
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">
