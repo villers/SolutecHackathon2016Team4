@@ -22,18 +22,17 @@ Route::group(['middleware' => 'cors'], function () {
 
     // Upload Routes
     Route::group(['middleware' => 'jwt.auth'], function () {
-        Route::post('upload', 'UploadController@upload');
-
         // CRUD Routes
+        Route::post('upload/cv', 'UploadController@cv');
+        Route::post('upload/avatar', 'UploadController@avatar');
         Route::resource('categories', 'CategoriesController');
         Route::resource('jobs', 'JobsController');
         Route::resource('notifications', 'NotificationsController');
         Route::resource('achievements', 'AchievementsController');
         Route::resource('users', 'UsersController');
+        Route::resource('votes', 'VotesController');
+        Route::resource('purposes', 'PurposesController');
         Route::post('users/achievements', 'UsersController@storeAchievement');
         Route::get('user/achievements', 'UsersController@getMe');
-
     });
-    Route::resource('votes', 'VotesController');
-    Route::resource('purposes', 'PurposesController');
 });
