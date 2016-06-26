@@ -1,8 +1,8 @@
 <md-content class="md-padding">
   <div layout="row">
-    <div flex="80" layout="column">
-      <md-card>
-        <h2>TOTO</h2>
+    <div flex="80" layout="column" class="cv-container">
+      <md-card class="cv-listener">
+        <h2>Espace employé</h2>
         <md-card-content>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus at illo vel. Beatae blanditiis cumque cupiditate deleniti doloremque inventore iste molestiae neque, non odio officia, quis ratione repellendus, velit.</p>
         </md-card-content>
@@ -10,7 +10,7 @@
     </div>
 
     <div flex="20" layout="column">
-      <md-card ng-repeat="user in [0,1,2,3,4,5,6,7,8,9]">
+      <md-card ng-repeat="user in vm.users">
         <h2>{{ user.login }}</h2>
         <md-card-content>
           <p>{{ user.last_name }}</p>
