@@ -1,6 +1,7 @@
-function skip($auth) {
+function skip($location, $auth) {
   return new Promise((resolve, reject) => {
     if ($auth.isAuthenticated()) {
+      $location.path('home');
       reject();
     } else {
       resolve();
