@@ -107,6 +107,6 @@ class AuthenticateController extends Controller
      */
     public function getMe()
     {
-        return Response::json(Auth::user()->with('achievements')->firstOrFail(), 200, [], JSON_NUMERIC_CHECK);
+        return Response::json(Auth::user()->with('achievements', 'notifications', 'jobs', 'votes', 'purposes')->firstOrFail(), 200, [], JSON_NUMERIC_CHECK);
     }
 }
