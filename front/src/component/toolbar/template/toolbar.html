@@ -6,6 +6,10 @@
         </a>
     </h2>
 
+  <md-button class="md-icon-button" aria-label="Uploader votre CV">
+    <md-icon md-font-library="material-icons">cloud_upload</md-icon>
+  </md-button>
+
     <md-menu ng-if="vm.isAuthenticated()">
         <md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation" class="md-raised" id="toolbar-button">
           <md-icon md-font-icon="zmdi zmdi-face"></md-icon>{{ $root.currentUser.login }}

@@ -7,9 +7,6 @@ import aria from 'angular-aria';
 import messages from 'angular-messages';
 import satellizer from 'satellizer';
 
-// use special upload
-require('lf-ng-md-file-input');
-
 import services from './app.services';
 import components from './app.components';
 import directives from './app.directives';

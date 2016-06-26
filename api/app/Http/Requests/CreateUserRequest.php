@@ -38,8 +38,8 @@ class CreateUserRequest extends Request
         "postal_code"           => "required|numeric|max:5",
         "address_number"        => "required|numeric",
         "address"               => "required|max:70",
-        "premium"               => "required|min:0|max:1",
-        "date_premium"          => "required",
+        "premium"               => "optional|boolean",
+        "date_premium"          => "date|optional",
         ];
     }
 
