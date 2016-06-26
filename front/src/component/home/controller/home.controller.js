@@ -37,7 +37,7 @@ class NetflixHome {
   }
 
   getHeight() {
-    return `${window.screen.height - document.querySelector('.cv-container')[0].scrollTop}px`;
+    return `${window.screen.availHeight - 100}px`;
   }
 }
 
