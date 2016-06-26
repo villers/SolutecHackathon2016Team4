@@ -13,6 +13,7 @@ class Profil {
     this.countries = [];
     this.file = {};
     this.api = null;
+    this.apicv = null;
     this.types = ['candidate', 'recruiter'];
 
     this.credentialsUpdate = {
@@ -67,6 +68,31 @@ class Profil {
 
         const toast = SERVICES.get('$mdToast').simple()
           .textContent('Photos de profil bien ajoutée')
+          .highlightAction(true)
+          .highlightClass('md-accent')
+          .hideDelay(3000)
+          .position('bottom right');
+
+        SERVICES.get('$mdToast').show(toast);
+      })
+      .catch(err => console.log(err));
+  }
+
+  uploadcv() {
+    const formData = new FormData();
+    formData.append('pdf', this.cv[0].lfFile);
+    formData.append('id', this.credentialsUpdate.id);
+
+    SERVICES.get('usersService').uploadcv(formData, {
+      transformRequest: angular.identity,
+      headers: { 'Content-Type': undefined },
+    })
+      .then(() => {
+        this.apicv.removeAll();
+        this.sync();
+
+        const toast = SERVICES.get('$mdToast').simple()
+          .textContent('CV bien ajoutée')
           .highlightAction(true)
           .highlightClass('md-accent')
           .hideDelay(3000)

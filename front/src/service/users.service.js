@@ -45,6 +45,10 @@ class UsersService {
     return SERVICES.get('$http').post(`${this.apiUrl}/upload/avatar`, params, headers);
   }
 
+  uploadcv(params, headers) {
+    return SERVICES.get('$http').post(`${this.apiUrl}/upload/cv`, params, headers);
+  }
+
   /**
    * Factory of this class
    * @returns {UsersService}
