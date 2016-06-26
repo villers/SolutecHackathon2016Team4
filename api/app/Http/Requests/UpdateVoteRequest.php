@@ -27,7 +27,8 @@ class UpdateVoteRequest extends Request
     public function rules()
     {
         return [
-            'user_id' => 'required|exists:users,id',
+            'from_user_id' => 'required|exists:users,id',
+            'to_user_id' => 'required|exists:users,id',
             'note'    => 'required|min:1|max:5',
         ];
     }
