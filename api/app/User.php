@@ -29,8 +29,8 @@ class User extends Authenticatable
     public function achievements()
     {
         return $this->belongsToMany('App\Achievement')
-            ->withPivot('has_read')
-            ->withTimestamps();
+                    ->withPivot('has_read')
+                    ->withTimestamps();
     }
 
     public function purposes()

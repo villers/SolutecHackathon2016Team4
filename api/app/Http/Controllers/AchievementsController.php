@@ -17,7 +17,6 @@ class AchievementsController extends Controller
     public function index()
     {
         $achievements = Achievement::all();
-
         return Response::json(compact('achievements'), 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -34,9 +33,7 @@ class AchievementsController extends Controller
             "points"  => $request["points"],
             "icon"    => $request["icon"],
         ]);
-
-        $message = 'L\'haut-fait a bien été enregistré !';
-
+        $message = 'Le haut-fait a bien été enregistré !';
         return Response::json(compact('message', 'achievement'), 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -49,7 +46,6 @@ class AchievementsController extends Controller
     public function show($id)
     {
         $achievement = Achievement::findOrFail($id);
-
         return Response::json(compact('achievement'), 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -63,15 +59,11 @@ class AchievementsController extends Controller
     public function update(Requests\CreateAchievementRequest $request, $id)
     {
         $achievement = Achievement::findOrFail($id);
-
         $achievement->message = $request['message'];
-        $achievement->points = $request['points'];
-        $achievement->icon = $request['icon'];
-
+        $achievement->points  = $request['points'];
+        $achievement->icon    = $request['icon'];
         $achievement->save();
-
-        $message = 'L\'haut-fait a bien été édité !';
-
+        $message = 'Le haut-fait a bien été édité !';
         return Response::json(compact('message', 'achievement'), 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -84,11 +76,8 @@ class AchievementsController extends Controller
     public function destroy($id)
     {
         $achievement = Achievement::findOrFail($id);
-
         $achievement->delete();
-
-        $message = 'L\'haut-fait a bien été supprimé !';
-
+        $message = 'Le haut-fait a bien été supprimé !';
         return Response::json(compact('message', 'achievement'), 200, [], JSON_NUMERIC_CHECK);
     }
 }

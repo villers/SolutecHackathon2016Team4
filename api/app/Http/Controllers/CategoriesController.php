@@ -18,9 +18,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        
         $categories = Category::all();
-
         return Response::json(compact('categories'),200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -33,9 +31,7 @@ class CategoriesController extends Controller
     public function store(Requests\CreateCategoryRequest $request)
     {
         $category = Category::create(['name' => $request['name']]);
-
         $message = 'La catégorie a bien été enregistré !';
-
         return Response::json(compact('message', 'category'),200,[], JSON_NUMERIC_CHECK);
     }
 
@@ -48,7 +44,6 @@ class CategoriesController extends Controller
     public function show($id)
     {
         $category = Category::findOrFail($id);
-
         return Response::json(compact('category'), 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -62,13 +57,9 @@ class CategoriesController extends Controller
     public function update(Request $request, $id)
     {
         $category = Category::findOrFail($id);
-
         $category->message = $request['name'];
-
         $category->save();
-
         $message = 'La catégorie a bien été édité !';
-
         return Response::json(compact('message', 'category'), 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -81,11 +72,8 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrFail($id);
-
         $category->delete();
-
         $message = 'La catégorie a bien été supprimé !';
-
         return Response::json(compact('message', 'category'), 200, [], JSON_NUMERIC_CHECK);
     }
 }

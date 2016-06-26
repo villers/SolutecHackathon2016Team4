@@ -8,6 +8,9 @@ class PurposesService {
 
     this.apiUrl = SERVICES.get('configService').get('API_URL');
   }
+  me(id) {
+    return SERVICES.get('$http').get(`${this.apiUrl}/user/purposes/${id}`);
+  }
 
   all() {
     return SERVICES.get('$http').get(`${this.apiUrl}/purposes`);

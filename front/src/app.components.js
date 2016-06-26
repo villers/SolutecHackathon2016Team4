@@ -7,6 +7,7 @@ import Home from './component/home/home.component';
 import Profil from './component/profil/profil.component';
 import Achievements from './component/achievements/achievements.component';
 import Notifications from './component/notifications/notifications.component';
+import Purposes from './component/purposes/purposes.component';
 
 const moduleName = 'app.components';
 
@@ -18,6 +19,7 @@ angular
     .component('home', Home)
     .component('profil', Profil)
     .component('achievements', Achievements)
-    .component('notifications', Notifications);
+    .component('notifications', Notifications)
+    .component('purposes', Purposes);
 
 export default moduleName;

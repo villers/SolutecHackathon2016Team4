@@ -18,7 +18,6 @@ class VotesController extends Controller
     public function index()
     {
         $votes = Vote::all();
-
         return Response::json(compact('votes'), 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -31,7 +30,6 @@ class VotesController extends Controller
     public function show($id)
     {
         $vote = Vote::findOrFail($id);
-
         return Response::json(compact('vote'), 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -45,15 +43,11 @@ class VotesController extends Controller
     public function update(Requests\UpdateVoteRequest $request, $id)
     {
         $vote = Vote::findOrFail($id);
-
         $vote->from_user_id = $request['from_user_id'];
         $vote->to_user_id = $request['to_user_id'];
         $vote->note = $request['note'];
-
         $vote->save();
-
         $message = 'Le vote a bien été édité !';
-
         return Response::json(compact('message', 'vote'), 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -70,9 +64,7 @@ class VotesController extends Controller
             'to_user_id' => $request['to_user_id'],
             'note'    => $request['note'],
         ]);
-
         $message = 'Le vote a bien été crée';
-
         return Response::json(compact('message', 'vote'), 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -85,11 +77,8 @@ class VotesController extends Controller
     public function destroy($id)
     {
         $vote = Vote::findOrFail($id);
-
         $vote->delete();
-
         $message = 'Le vote a bien été supprimé !';
-
         return Response::json(compact('message', 'vote'), 200, [], JSON_NUMERIC_CHECK);
     }
 }

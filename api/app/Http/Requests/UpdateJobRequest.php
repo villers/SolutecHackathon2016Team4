@@ -26,16 +26,16 @@ class UpdateJobRequest extends Request
     public function rules()
     {
         return [
-            "user_id" => "required|exists:users,id",
-            "category_id" => "required",
-            "country" => "required|min:0|max:70",
-            "city" => "required|min:0|max:70",
-            "postal_code" => "required|min:0|max:70",
+            "user_id"         => "required|exists:users,id",
+            "category_id"     => "required",
+            "country"         => "required|min:0|max:70",
+            "city"            => "required|min:0|max:70",
+            "postal_code"     => "required|min:0|max:70",
             "entreprise_desc" => "required|min:0|max:6000",
-            "message" => "required|min:0|max:6000",
-            "lang" => "required|min:0|max:50",
-            "graduation" => "required|min:0|max:50",
-            "salary" => "required|min:0",
+            "message"         => "required|min:0|max:6000",
+            "lang"            => "required|min:0|max:50",
+            "graduation"      => "required|min:0|max:50",
+            "salary"          => "required|min:0",
         ];
     }
 

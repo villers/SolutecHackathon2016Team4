@@ -27,8 +27,8 @@ class UpdatePurposeRequest extends Request
     {
         return [
             "from_user_id" => "required|exists:users,id",
-            "to_user_id" => "required|exists:users,id",
-            "message" => "required|min:0|max:6000",
+            "to_user_id"   => "required|exists:users,id",
+            "message"      => "required|min:0|max:6000",
         ];
     }
 

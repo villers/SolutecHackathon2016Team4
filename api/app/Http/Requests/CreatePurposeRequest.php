@@ -27,8 +27,8 @@ class CreatePurposeRequest extends Request
     {
         return [
             "from_user_id" => "required",
-            "to_user_id" => "required",
-            "message" => "required|max:6000",
+            "to_user_id"   => "required",
+            "message"      => "required|max:6000",
         ];
     }
 

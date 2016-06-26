@@ -11,7 +11,7 @@ class Vote extends Model
 
     // The attributes that should be hidden for arrays.
 	protected $hidden = [];
-
+	
 	public function user()
 	{
 		return $this->belongsTo('App\User', 'to_user_id');

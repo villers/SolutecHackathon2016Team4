@@ -21,7 +21,6 @@ class CreateUserRequest extends Request
 
     /**
      * Get the validation rules that apply to the request.
-     *
      * @return array
      */
     public function rules()
@@ -42,7 +41,6 @@ class CreateUserRequest extends Request
         "date_premium"          => "date|optional",
         ];
     }
-
 
     public function response(array $errors)
     {

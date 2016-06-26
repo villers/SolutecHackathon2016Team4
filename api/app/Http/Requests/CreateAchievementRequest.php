@@ -27,8 +27,8 @@ class CreateAchievementRequest extends Request
     {
         return [
             "message" => "required|max:50",
-            "points" => "required|numeric",
-            "icon" => "required|max:25",z
+            "points"  => "required|numeric",
+            "icon"    => "required|max:25",
         ];
     }
 

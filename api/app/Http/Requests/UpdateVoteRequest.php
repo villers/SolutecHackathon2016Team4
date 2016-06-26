@@ -28,8 +28,8 @@ class UpdateVoteRequest extends Request
     {
         return [
             'from_user_id' => 'required|exists:users,id',
-            'to_user_id' => 'required|exists:users,id',
-            'note'    => 'required|min:1|max:5',
+            'to_user_id'   => 'required|exists:users,id',
+            'note'         => 'required|min:1|max:5',
         ];
     }
 

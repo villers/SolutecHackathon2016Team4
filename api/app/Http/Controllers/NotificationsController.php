@@ -18,7 +18,6 @@ class NotificationsController extends Controller
     public function index()
     {
         $notifications = Notification::all();
-
         return Response::json(compact('notifications'), [], JSON_NUMERIC_CHECK);
     }
 
@@ -34,9 +33,7 @@ class NotificationsController extends Controller
             'has_read' => $request['has_read'],
             'message'  => $request['message'],
         ]);
-
         $message = 'La notification a bien été enregistré !';
-
         return Response::json(compact('message', 'notification'), 200, [], JSON_NUMERIC_CHECK);
     }
 
@@ -49,7 +46,6 @@ class NotificationsController extends Controller
     public function show($id)
     {
         $notification = Notification::findOrFail($id);
-
         return Response::json(compact('notification'), [], JSON_NUMERIC_CHECK);
     }
 
@@ -63,13 +59,10 @@ class NotificationsController extends Controller
     public function update(Request $request, $id)
     {
         $notification = Notification::findOrFail($id);
-
-        $notification->user_id = $request['user_id'];
+        $notification->user_id  = $request['user_id'];
         $notification->has_read = $request['has_read'];
-        $notification->message = $request['message'];
-
+        $notification->message  = $request['message'];
         $message = 'La catégorie a bien été édité !';
-
         return Response::json(compact('message', 'notification'), [], JSON_NUMERIC_CHECK);
     }
 
@@ -82,9 +75,7 @@ class NotificationsController extends Controller
     public function destroy($id)
     {
         $notification = Notification::find($id);
-
         $notification->delete();
-
         return response()->json(['status' => 'true', 'message' => 'Notification supprimé !']);
     }
 }
