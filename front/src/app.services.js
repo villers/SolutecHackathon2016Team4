@@ -5,7 +5,7 @@ import AchievementsService from './service/achievements.service';
 import CategoriesService from './service/categories.service';
 import NotificationsService from './service/notifications.service';
 import UsersService from './service/users.service';
-import JobsService from './service/jobs.service';
+import PurposesService from './service/purposes.service.js';
 
 const moduleName = 'app.services';
 
@@ -16,7 +16,7 @@ angular
   .factory('categoriesService', CategoriesService.factory)
   .factory('notificationsService', NotificationsService.factory)
   .factory('usersService', UsersService.factory)
-  .factory('jobsService', JobsService.factory)
+  .factory('purposesService', PurposesService.factory)
   .factory('configService', ConfigService.factory);
 
 export default moduleName;
