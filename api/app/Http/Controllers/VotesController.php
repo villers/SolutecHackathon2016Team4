@@ -17,8 +17,9 @@ class VotesController extends Controller
      */
     public function index()
     {
-        $vote = Vote::all();
-        return Response::json(compact('vote'), 200, [], JSON_NUMERIC_CHECK);
+        $votes = Vote::all();
+
+        return Response::json(compact('votes'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
@@ -30,17 +31,18 @@ class VotesController extends Controller
     public function show($id)
     {
         $vote = Vote::findOrFail($id);
+
         return Response::json(compact('vote'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request $request
-    * @param  int $id
-    * @return \Illuminate\Http\Response
-    */
-    public function update(Request $request, $id)
+     * Update the specified resource in storage.
+     *
+     * @param Requests\UpdateVoteRequest $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Requests\UpdateVoteRequest $request, $id)
     {
         $vote = Vote::findOrFail($id);
 
@@ -55,31 +57,31 @@ class VotesController extends Controller
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @param Requests\CreateVoteRequest $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Requests\CreateVoteRequest $request)
     {
         $vote = Vote::create([
-            'user_id'         => $request['user_id'],
-            'note'     => $request['note'],
-            ]);
+            'user_id' => $request['user_id'],
+            'note'    => $request['note'],
+        ]);
 
         $message = 'Le vote a bien été crée';
 
         return Response::json(compact('message', 'vote'), 200, [], JSON_NUMERIC_CHECK);
     }
 
-
-     /**
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-     public function destroy($id)
-     {
+    public function destroy($id)
+    {
         $vote = Vote::findOrFail($id);
 
         $vote->delete();

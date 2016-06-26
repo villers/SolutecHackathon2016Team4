@@ -52,11 +52,11 @@ class UsersController extends Controller
 
     /**
      * Update user data
-     * @param Request $request
+     * @param Requests\UpdateUserRequest $request
      * @param $id
      * @return mixed
      */
-    public function update(Request $request, $id)
+    public function update(Requests\UpdateUserRequest $request, $id)
     {
         $user = User::findOrFail($id);
 
@@ -77,7 +77,7 @@ class UsersController extends Controller
         $user->graduation = $request['graduation'];
         $user->lang = $request['lang'];
         $user->can_drive = $request['can_drive'];
-        
+
         if ($request['password']) {
             $user->password = bcrypt($request['password']);
         }

@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Support\Facades\Input;
 
 
-class CreateVoteRequest extends Request
+class UpdateVoteRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,7 @@ class CreateVoteRequest extends Request
     {
         return [
             'user_id' => 'required|exists:users,id',
-            'note'    => 'required|max:5',
+            'note'    => 'required|min:1|max:5',
         ];
     }
 

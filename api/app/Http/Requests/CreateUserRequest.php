@@ -7,8 +7,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Support\Facades\Input;
 
 
-
-
 class CreateUserRequest extends Request
 {
     /**
@@ -29,17 +27,17 @@ class CreateUserRequest extends Request
     public function rules()
     {
         return [
-            "login" => "unique:users,login|required|max:15",
-            "email" => "unique:users,email|required|max:255",
-            "first_name" => "required|max:35",
-            "last_name" => "required|max:35",
-            "password" => "required|max:255|confirmed",
+            "login"                 => "unique:users,login|required|max:15",
+            "email"                 => "unique:users,email|required|max:255",
+            "first_name"            => "required|max:35",
+            "last_name"             => "required|max:35",
+            "password"              => "required|max:255|confirmed",
             "password_confirmation" => "required|max:255",
-            "country" => "required|max:70",
-            "city" => "required|max:70",
-            "postal_code" => "required|max:5",
-            "address_number" => "required",
-            "address" => "required|max:70",
+            "country"               => "required|max:70",
+            "city"                  => "required|max:70",
+            "postal_code"           => "required|numeric|max:5",
+            "address_number"        => "required|numeric",
+            "address"               => "required|max:70",
         ];
     }
 

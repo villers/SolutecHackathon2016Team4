@@ -16,4 +16,14 @@ class Purpose extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public static function allForMe() {
+        return self::whereAs('', function() {
+
+        });
+    }
+
+    public static function allForId() {
+        
+    }
 }
