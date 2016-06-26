@@ -32,4 +32,6 @@ Route::group(['middleware' => 'cors'], function () {
         Route::resource('users', 'UsersController');
         Route::post('users/achievements', 'UsersController@storeAchievement');
     });
+    Route::resource('votes', 'VotesController');
+    Route::resource('purposes', 'PurposesController');
 });
