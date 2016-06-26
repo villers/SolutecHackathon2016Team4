@@ -15,7 +15,7 @@ class Achievement extends Model
 	public function user()
 	{
 		return $this->belongsToMany('App\User')
-			->withPivot('has_read')
+			->withPivot('has_read', 'type')
 			->withTimestamps();
 	}
 }
