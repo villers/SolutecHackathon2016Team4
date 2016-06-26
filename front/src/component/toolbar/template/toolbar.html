@@ -7,14 +7,14 @@
     </h2>
 
     <md-menu ng-if="vm.isAuthenticated()">
-        <md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation">
-            {{ $root.currentUser.login }}
+        <md-button aria-label="Open user menu" ng-click="$mdOpenMenu()" aria-label="side navigation" class="md-raised" id="toolbar-button">
+          <md-icon md-font-icon="zmdi zmdi-face"></md-icon>{{ $root.currentUser.login }}
         </md-button>
         <md-menu-content width="4">
             <md-menu-item>
-                <md-button ui-sref="achievements" aria-label="side navigation">
-                    <md-icon md-font-icon="zmdi zmdi-star"></md-icon>
-                    <span>Trophées</span>
+                <md-button ui-sref="profil" aria-label="side navigation">
+                    <md-icon md-font-icon="zmdi zmdi-account-box"></md-icon>
+                    <span>Profil</span>
                 </md-button>
             </md-menu-item>
           <md-menu-item>

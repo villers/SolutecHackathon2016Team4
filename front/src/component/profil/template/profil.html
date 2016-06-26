@@ -106,18 +106,6 @@
                       </div>
                     </md-input-container>
 
-                    <md-input-container class="full-width">
-                      <label for="type">Types</label>
-                      <md-select id="type" ng-model="vm.credentialsUpdate.type" aria-label="Types">
-                        <md-option ng-repeat="type in vm.types" value="{{type}}">
-                          {{type === 'candidate' ? 'Candidat' : 'Recruteur' }}
-                        </md-option>
-                      </md-select>
-                      <div ng-messages="update.type.$error" ng-if="update.type.$dirty">
-                        <div ng-message when="required">Type requis</div>
-                      </div>
-                    </md-input-container>
-
                     <md-button class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" ng-click="vm.update()" ng-disabled="update.$invalid" aria-label="Valider">Valider</md-button>
                   </form>
                 </md-content>
