@@ -1,6 +1,12 @@
 # SolutecHackathon2016Team4
 Repository pour l'équipe 4 du hackathon organisé par l'entreprise Solutec
 
+Trello : 
+
+https://trello.com/b/GddF467h/front
+
+https://trello.com/b/SuYCoIDf/back
+
 # Hackathon-Solutec
 
 Hackathon Solutec 2016
