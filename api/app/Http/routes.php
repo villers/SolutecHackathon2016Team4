@@ -25,7 +25,6 @@ Route::group(['middleware' => 'cors'], function () {
         // CRUD Routes
         Route::post('upload/cv', 'UploadController@cv');
         Route::post('upload/avatar', 'UploadController@avatar');
-        Route::resource('categories', 'CategoriesController');
         Route::resource('jobs', 'JobsController');
         Route::resource('notifications', 'NotificationsController');
         Route::resource('achievements', 'AchievementsController');
@@ -36,6 +35,9 @@ Route::group(['middleware' => 'cors'], function () {
         Route::get('user/achievements', 'UsersController@getMe');
     });
 
-     Route::resource('premium', 'ShopController');
+    Route::resource('premium', 'ShopController');
+
+    Route::resource('categories', 'CategoriesController');
+
 
 });

@@ -11,7 +11,8 @@
         "caouecs/laravel-lang": "~3.0",
         "barryvdh/laravel-cors": "^0.8.0",
         "fzaninotto/faker": "^1.6",
-        "laravelcollective/html": "5.2.*"
+        "laravelcollective/html": "5.2.*",
+        "doctrine/dbal": "^2.5"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",

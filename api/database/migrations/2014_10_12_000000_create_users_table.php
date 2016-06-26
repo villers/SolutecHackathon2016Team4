@@ -15,7 +15,6 @@ class CreateUsersTable extends Migration
         Schema::create('users', function($table)
         {
             $table->increments('id');
-            $table->enum('type', ['candidate', 'recruiter']);
             $table->integer('points')->unsigned()->default(0);
             $table->string('last_name', 35);
             $table->string('first_name', 35);
