@@ -18,9 +18,6 @@ class DatabaseSeeder extends Seeder
         //Change this value to change the number of users generated
         $nb_users = 20;
 
-        //Change this value to change the number of jobs ad generated
-        $nb_jobs = 10;
-
         //This array contains a list of all graduations, change it as you want
         $graduations = array(
             'débutant',
@@ -33,35 +30,6 @@ class DatabaseSeeder extends Seeder
             'CAP',
             'BEP'
         );
-
-
-        //This array contains a list of all companies, change it as you want
-        $companies = array(
-            'DISTRIBUTION CASINO FRANCE',
-            'ADECCO FRANCE',
-            'RENAULT TRUCKS',
-            'BAYER SAS',
-            'SANOFI PASTEUR',
-            'EGEDIS',
-            'IVECO FRANCE',
-            'SA EAUX MINERALES EVIAN',
-            'ALUMINIUM PECHINEY',
-            'SOPRA STERIA GROUP',
-            'ENTREMONT ALLIANCE',
-            'SOCIETE COOPERATIVE D\'APPROVISIONNEMENT RHONE ALPES',
-            'COMPAGNIE NATIONALE DU RHONE', 'BECTON DICKINSON FRANCE',
-            'BIOMERIEUX SA',
-            'AXXES',
-            'JTEKT EUROPE',
-            'FLOREAL',
-            'MYLAN',
-            'MERIAL',
-            'KEM ONE',
-            'NTN-SNR ROULEMENTS',
-            'GROUPE SEB FRANCE',
-            'ENI FRANCE SARL'
-        );
-
 
         //This array contains all categories of jobs, change it as you want
         $categories = array(
@@ -82,7 +50,6 @@ class DatabaseSeeder extends Seeder
         );
 
         //This array contains all achievements of jobs, change it as you want
-
         $achievements = array(
             ['message' => 'Félicitations ! Vous avez reçu le trophée "Recruteur novice !" (Consulter 50 CV)  Bonus: 10 points', 'points' => 10, 'icon' => 'icon_name', 'type' => 1],
             ['message' => 'Félicitations ! Vous avez reçu le trophée "Recruteur avancé !" (Consulter 100 CV)  Bonus: 20 points', 'points' => 20, 'icon' => 'icon_name', 'type' => 2],
@@ -127,16 +94,22 @@ class DatabaseSeeder extends Seeder
        */
 
         //Seed for users
-
         for ($i = 0; $i < $nb_users; $i++) {
             $login = $faker->word;
+            $email = $faker->email;
 
-            $all_login = DB::table('users')->select('login')->get();
-            for ($i = 0; $i < count($all_login); $i++) {
-                $all_login[$i] = $all_login[$i]->login;
+            $all_users = DB::table('users')->select('login', 'email')->get();
+            $all_login = [];
+            $all_email = [];
+            for ($i = 0; $i < count($all_users); $i++) {
+                $all_login[$i] = $all_users[$i]->login;
+                $all_email[$i] = $all_users[$i]->email;
             }
             while (in_array($login, $all_login)) {
                 $login = $faker->word;
+            }
+            while (in_array($email, $all_email)) {
+                $email = $faker->word;
             }
 
             DB::table('users')->insert([
@@ -144,7 +117,7 @@ class DatabaseSeeder extends Seeder
                 'last_name' => $faker->lastName,
                 'first_name' => $faker->firstName($gender = null | 'male' | 'female'),
                 'login' => $login,
-                'email' => $faker->email,
+                'email' => $email,
                 'password' => bcrypt('azerty'),
                 'country' => 'France',
                 'city' => $faker->city,
@@ -164,9 +137,7 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-
         //Seed for categories
-
         foreach ($categories as $v) {
             DB::table('categories')->insert([
                 'name' => $v,
@@ -174,38 +145,8 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ]);
         }
-        
-        //Seed for jobs ads
 
-        $members = DB::table('users')->select('id')->get();
-
-        for ($i = 0; $i < count($members); $i++) {
-            $members[$i] = $members[$i]->id;
-        }
-
-        $categories_id = DB::table('categories')->select('id')->get();
-
-        for ($i = 0; $i < count($categories_id); $i++) {
-            $categories_id[$i] = $categories_id[$i]->id;
-        }
-
-        for ($i = 0; $i < $nb_jobs; $i++) {
-            DB::table('jobs')->insert([
-                'user_id' => $faker->randomElement($members),
-                'category_id' => $faker->randomElement($categories_id),
-                'country' => 'France',
-                'city' => $faker->city,
-                'postal_code' => $faker->postcode,
-                'entreprise_desc' => $faker->randomElement($companies),
-                'message' => $faker->text($maxNbChars = 300),
-                'lang' => 'fr',
-                'graduation' => $faker->randomElement($graduations),
-                'salary' => $faker->randomFloat($nbMaxDecimals = NULL, $min = 1300, $max = 4000),
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]);
-        }
-
+        // Seed for achievements
         foreach ($achievements as $v) {
             DB::table('achievements')->insert([
                 'message' => $v["message"],
@@ -220,7 +161,5 @@ class DatabaseSeeder extends Seeder
         $user = User::findOrFail(1);
         $user->achievements()->attach(1);
         $user->achievements()->attach(2);
-
-
     }
 }

@@ -26,15 +26,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Notification');
     }
 
-    /**
-     * Has Many Jobs
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function jobs()
-    {
-        return $this->hasMany('App\Job');
-    }
-
     public function achievements()
     {
         return $this->belongsToMany('App\Achievement')

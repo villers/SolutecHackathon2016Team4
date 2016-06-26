@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-
 use App\Achievement;
-
 use App\Http\Requests;
 
 class AchievementsController extends Controller
