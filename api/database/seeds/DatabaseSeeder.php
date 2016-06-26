@@ -84,15 +84,16 @@ class DatabaseSeeder extends Seeder
         //This array contains all achievements of jobs, change it as you want
 
         $achievements = array(
-            ['message' => 'Félicitations ! Vous avez reçu le trophée "Recruteur novice" (Consulter 50 CV)  Bonus: 10 points', 'points' => 10, 'icon' => 'icon_name', 'type' => 1],
-            ['message' => 'Félicitations ! Vous avez reçu le trophée "Recruteur avancé" (Consulter 100 CV)  Bonus: 20 points', 'points' => 20, 'icon' => 'icon_name', 'type' => 2],
-            ['message' => 'Félicitations ! Vous avez reçu le trophée "Recruteur expert" (Consulter 200 CV)  Bonus: 30 points', 'points' => 30, 'icon' => 'icon_name', 'type' => 3],
-            ['message' => 'Félicitations ! Vous avez reçu le trophée "Correcteur novice" (Corriger 20 CV) Bonus: 10 points', 'points' => 10, 'icon' => 'icon_name', 'type' => 1],
-            ['message' => 'Félicitations ! Vous avez reçu le trophée "Correcteur avancé" (Corriger 50 CV) Bonus: 20 points', 'points' => 20, 'icon' => 'icon_name', 'type' => 2],
-            ['message' => 'Félicitations ! Vous avez reçu le trophée "Correcteur expert" (Corriger 100 CV) Bonus: 30 points', 'points' => 30, 'icon' => 'icon_name', 'type' => 3],
-            ['message' => 'Félicitations ! Vous avez reçu le trophée "Membre Premium novice" (Acheter 5 fois le status Premium) Bonus: 10 points', 'points' => 10, 'icon' => 'icon_name', 'type' => 1],
-            ['message' => 'Félicitations ! Vous avez reçu le trophée "Membre Premium avancé" (Acheter 10 fois le status Premium) Bonus: 20 points', 'points' => 20, 'icon' => 'icon_name', 'type' => 2],
-            ['message' => 'Félicitations ! Vous avez reçu le trophée "Membre Premium expert" (Acheter 20 fois le status Premium) Bonus: 30 points', 'points' => 30, 'icon' => 'icon_name', 'type' => 3],
+            ['message' => 'Félicitations ! Vous avez reçu le trophée "Recruteur novice !" (Consulter 50 CV)  Bonus: 10 points', 'points' => 10, 'icon' => 'icon_name', 'type' => 1],
+            ['message' => 'Félicitations ! Vous avez reçu le trophée "Recruteur avancé !" (Consulter 100 CV)  Bonus: 20 points', 'points' => 20, 'icon' => 'icon_name', 'type' => 2],
+            ['message' => 'Félicitations ! Vous avez reçu le trophée "Recruteur expert !" (Consulter 200 CV)  Bonus: 30 points', 'points' => 30, 'icon' => 'icon_name', 'type' => 3],
+            ['message' => 'Félicitations ! Vous avez reçu le trophée "Correcteur novice !" (Corriger 10 CV) Bonus: 10 points', 'points' => 10, 'icon' => 'icon_name', 'type' => 1],
+            ['message' => 'Félicitations ! Vous avez reçu le trophée "Correcteur avancé !" (Corriger 20 CV) Bonus: 20 points', 'points' => 20, 'icon' => 'icon_name', 'type' => 2],
+            ['message' => 'Félicitations ! Vous avez reçu le trophée "Correcteur expert !" (Corriger 50 CV) Bonus: 30 points', 'points' => 30, 'icon' => 'icon_name', 'type' => 3],
+            ['message' => 'Félicitations ! Vous avez reçu le trophée "Membre Premium novice !" (Acheter 5 fois le status Premium) Bonus: 10 points', 'points' => 10, 'icon' => 'icon_name', 'type' => 1],
+            ['message' => 'Félicitations ! Vous avez reçu le trophée "Membre Premium avancé !" (Acheter 10 fois le status Premium) Bonus: 20 points', 'points' => 20, 'icon' => 'icon_name', 'type' => 2],
+            ['message' => 'Félicitations ! Vous avez reçu le trophée "Membre Premium expert !" (Acheter 20 fois le status Premium) Bonus: 30 points', 'points' => 30, 'icon' => 'icon_name', 'type' => 3],
+            ['message' => 'Félicitations ! Vous avez reçu le trophée "Nouveau membre !" (Créer un compte) Bonus: 10 points', 'points' => 10, 'icon' => 'icon_name', 'type' => 1],
         );
 
         $faker = Faker::create('fr_FR');
