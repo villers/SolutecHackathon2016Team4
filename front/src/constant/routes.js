@@ -76,6 +76,12 @@ export const ROUTES = {
     template: '<notifications></notifications>',
     resolve: { authenticator },
   },
+  purposes: {
+    name: 'purposes',
+    url: '/purposes',
+    template: '<purposes></purposes>',
+    resolve: { authenticator },
+  },
   comparator: {
     name: 'comparator',
     url: '/comparator',

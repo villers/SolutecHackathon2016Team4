@@ -1,0 +1,21 @@
+<md-content class="md-padding" id="purposes">
+  <md-card>
+    <md-toolbar layout="row" class="md-hue-1">
+      <div class="md-toolbar-tools">
+        <span>Vos derniers messages</span>
+      </div>
+    </md-toolbar>
+    <md-content layout="row" flex>
+      <md-list flex>
+        <md-list-item class="md-3-line md-long-text" ng-repeat="purpose in vm.purposes.purposes">
+          <div class="md-list-item-text">
+            <p>De {{ purpose.user.user.login }}</p>
+            <p>{{ purpose.created_at }}</p>
+            <h3>{{ purpose.message }}</h3>
+          </div>
+          <md-divider></md-divider>
+        </md-list-item>
+      </md-list>
+    </md-content>
+  </md-card>
+</md-content>
