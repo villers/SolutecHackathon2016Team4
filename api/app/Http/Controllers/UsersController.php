@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Achievement;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests;
 
@@ -17,9 +18,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $user = User::all();
+        $users = User::all();
 
-        return response()->json(compact('user'));
+        return Response::json(compact('users'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
@@ -31,6 +32,10 @@ class UsersController extends Controller
         $user = User::findOrFail($request['user_id']);
 
         $user->achievements()->attach($request['achievements_id']);
+
+        $message = 'Le haut-fait a bien été ajouté !';
+
+        return Response::json(compact('message'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
@@ -42,16 +47,16 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
 
-        return response()->json(compact('user'));
+        return Response::json(compact('user'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
      * Update user data
-     * @param Request $request
+     * @param Requests\UpdateUserRequest $request
      * @param $id
      * @return mixed
      */
-    public function update(Request $request, $id)
+    public function update(Requests\UpdateUserRequest $request, $id)
     {
         $user = User::findOrFail($id);
 
@@ -61,7 +66,6 @@ class UsersController extends Controller
         $user->first_name = $request['first_name'];
         $user->login = $request['login'];
         $user->email = $request['email'];
-        $user->password = $request['password'];
         $user->country = $request['country'];
         $user->city = $request['city'];
         $user->postal_code = $request['postal_code'];
@@ -73,12 +77,18 @@ class UsersController extends Controller
         $user->graduation = $request['graduation'];
         $user->lang = $request['lang'];
         $user->can_drive = $request['can_drive'];
+        $user->premium = $request['premium'];
+        $user->date_premium = $request["date_premium"];
 
-        $message = "Success: User updated";
+        if ($request['password']) {
+            $user->password = bcrypt($request['password']);
+        }
+
+        $message = 'L\'utilisateur a bien été édité !';
 
         $user->save();
 
-        return response()->json(compact('message', 'user'));
+        return Response::json(compact('message', 'user'), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
@@ -92,6 +102,8 @@ class UsersController extends Controller
 
         $user->delete();
 
-        return response()->json(['status' => 'true', 'message' => 'Success: User deleted']);
+        $message = 'L\'utilisateur a bien été supprimé !';
+
+        return Response::json(compact('message', 'user'), 200, [], JSON_NUMERIC_CHECK);
     }
 }

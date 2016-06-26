@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
@@ -15,7 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //Change this value to change the number of users generated
-        $nb_users = 50;
+        $nb_users = 20;
 
         //Change this value to change the number of jobs ad generated
         $nb_jobs = 10;
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
             'Bac+4',
             'Bac+5'
         );
+
 
         //This array contains a list of all companies, change it as you want
         $companies = array(
@@ -79,6 +81,34 @@ class DatabaseSeeder extends Seeder
 
         $faker = Faker::create('fr_FR');
 
+        // Static user for test
+
+        /*
+        DB::table('users')->insert([
+            'type' => $faker->randomElement($array = array('candidate', 'recruiter')),
+            'points' => $faker->numberBetween($min = 0, $max = 9000),
+            'last_name' => 'titi',
+            'first_name' => 'titi',
+            'login' => 'titi',
+            'email' => 'titi@titi.fr',
+            'password' => bcrypt('titi'),
+            'country' => 'France',
+            'city' => $faker->city,
+            'postal_code' => $faker->postcode,
+            'address_number' => $faker->buildingNumber,
+            'address' => trim(preg_replace('/[0-9]|,+/', '', $faker->streetAddress)),
+            'is_active' => 1,
+            'token_active' => bin2hex(random_bytes(20)),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'graduation' => $faker->randomElement($graduations),
+            'lang' => 'fr',
+            'can_drive' => $faker->randomElement($array = array(0, 1)),
+            'picture' => 'avatar.png',
+            'cv' => 'cv.pdf',
+        ]);
+       */
+
         //Seed for users
 
         for ($i = 0; $i < $nb_users; $i++) {
@@ -107,10 +137,14 @@ class DatabaseSeeder extends Seeder
                 'address' => trim(preg_replace('/[0-9]|,+/', '', $faker->streetAddress)),
                 'is_active' => $faker->randomElement($array = array(0, 1)),
                 'token_active' => bin2hex(random_bytes(20)),
-                'created_at' => date('Y-m-d h:m:s'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
                 'graduation' => $faker->randomElement($graduations),
                 'lang' => 'fr',
                 'can_drive' => $faker->randomElement($array = array(0, 1)),
+                'phone_number' => $faker->phoneNumber,
+                'picture' => 'avatar.png',
+                'cv' => 'cv.pdf',
             ]);
         }
 
@@ -134,7 +168,8 @@ class DatabaseSeeder extends Seeder
                 'lang' => 'fr',
                 'graduation' => $faker->randomElement($graduations),
                 'salary' => $faker->randomFloat($nbMaxDecimals = NULL, $min = 1300, $max = 4000),
-                'created_at' => date('Y-m-d h:m:s'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]);
         }
 
@@ -143,17 +178,26 @@ class DatabaseSeeder extends Seeder
         foreach ($categories as $v) {
             DB::table('categories')->insert([
                 'name' => $v,
-                'created_at' => date('Y-m-d h:m:s'),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]);
         }
 
-        /*
-        DB::table('achievements')->insert([
-            'message' => 'Félicitations vous avez accompli le haut fait "Super recruteur !"',
-            'points' => 100,
-            'icon' => '3D_rotation',
-            'created_at' => date('Y-m-d h:m:s'),
-        ]);
-        */
+        for ($i = 1; $i < 5; $i++) {
+            DB::table('achievements')->insert([
+                'message' => 'Acivements' . $i,
+                'points' => 100,
+                'icon' => '3D_rotation',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'type'=> $faker->randomElement($array = array(1, 2, 3)),
+            ]);
+        }
+
+        $user = User::findOrFail(1);
+        $user->achievements()->attach(1);
+        $user->achievements()->attach(2);
+
+
     }
 }

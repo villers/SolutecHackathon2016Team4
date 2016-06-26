@@ -6,7 +6,7 @@ use App\Http\Requests\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 
-class CreateNotificationRequest extends Request
+class UpdateCategoryRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,12 @@ class CreateNotificationRequest extends Request
     public function rules()
     {
         return [
-            "user_id" => "required|exists:users,id",
-            "has_read" => "required|min:0",
-            "message" => "required|max:6000",
+            "name" => "required|min:0|max:35",
         ];
+    }
+
+    public function response(array $errors)
+    {
+        return new JsonResponse($errors, 422);
     }
 }

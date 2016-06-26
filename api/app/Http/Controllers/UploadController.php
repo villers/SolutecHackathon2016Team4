@@ -3,33 +3,52 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Notification;
 use App\Http\Requests;
-use Illuminate\Support\Facades\Input;
 use App\User;
 
-class UploadController extends Controller 
+class UploadController extends Controller
 {
-	public function upload()
-	{
-		$id = 2;
+    /**
+     * Avatar upload
+     * @param Request $request
+     */
+    public function avatar(Request $request)
+    {
+        $id = $request->input('id');
+        $destinationPath = 'avatar/';
 
-		$destinationPath = 'avatar/';
+        $user = User::findOrFail($id);
 
-		$base64 = Input::get('base64');
+        array_map('unlink', glob("${destinationPath}*_{$id}.*"));
 
-		$imageData = base64_decode($base64);
-		$source = imagecreatefromstring($imageData);
-		$rotate = imagerotate($source, 0, 0);
-		$imageSave = imagejpeg($rotate, $destinationPath.$id.'.jpg',100);
-		imagedestroy($source);
+        // Avatar upload
+        $file = $request->file('file');
+        $fileName = uniqid() . '_' . $id . '.' . $file->getClientOriginalExtension();
+        $file->move($destinationPath, $fileName);
 
-		$user = User::findOrFail($id);
+        $user->picture = $fileName;
 
-		$user->picture = $destinationPath.$id.'.jpg';
+        $user->save();
+    }
 
-		$user->save();
-	}
+    /**
+     * CV upload
+     * @param Request $request
+     */
+    public function cv(Request $request)
+    {
+        $id = $request->input('id');
+
+        $pdf = $request->file('pdf');
+        $destinationPath = 'cv/';
+        $fileName = $id . '.pdf';
+
+        array_map('unlink', glob("${destinationPath}*_{$id}.*"));
+
+        $pdf->move($destinationPath, $fileName);
+
+        $user = User::findOrFail($id);
+        $user->cv = $fileName;
+        $user->save();
+    }
 }
-
-?>

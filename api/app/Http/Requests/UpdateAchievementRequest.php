@@ -4,9 +4,9 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Illuminate\Support\Facades\Input;
 
-
-class CreateNotificationRequest extends Request
+class UpdateAchievementRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,16 @@ class CreateNotificationRequest extends Request
     public function rules()
     {
         return [
-            "user_id" => "required|exists:users,id",
-            "has_read" => "required|min:0",
-            "message" => "required|max:6000",
+            "message" => "required|min:0|max:50",
+            "points" => "required|min:0|numeric",
+            "icon" => "required|min:0|max:25",
         ];
+    }
+
+
+
+    public function response(array $errors)
+    {
+        return new JsonResponse($errors, 422);
     }
 }

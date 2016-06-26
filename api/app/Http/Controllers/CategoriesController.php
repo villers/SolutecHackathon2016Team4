@@ -19,7 +19,7 @@ class CategoriesController extends Controller
     {
         $categories = Category::all();
 
-        return Response::json(compact('categories'), [], JSON_NUMERIC_CHECK);
+        return Response::json(compact('categories'),200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
@@ -34,7 +34,7 @@ class CategoriesController extends Controller
 
         $message = 'La catégorie a bien été enregistré !';
 
-        return Response::json(compact('message', 'category'), [], JSON_NUMERIC_CHECK);
+        return Response::json(compact('message', 'category'),200,[], JSON_NUMERIC_CHECK);
     }
 
     /**
