@@ -3,45 +3,52 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Notification;
 use App\Http\Requests;
-use Illuminate\Support\Facades\Input;
 use App\User;
 
-class UploadController extends Controller 
+class UploadController extends Controller
 {
-	public function avatar(Request $request)
-	{
-		$id= $request->input('id');
+    /**
+     * Avatar upload
+     * @param Request $request
+     */
+    public function avatar(Request $request)
+    {
+        $id = $request->input('id');
+        $destinationPath = 'avatar/';
 
-		//Avatar upload
-		$file = $request->file('file');
-		$destinationPath = 'avatar/';
-		$fileName = $id . '.' . $file->getClientOriginalExtension();
-		$file->move($destinationPath, $fileName);
+        $user = User::findOrFail($id);
 
-		$user = User::findOrFail($id);
+        array_map('unlink', glob("${destinationPath}*_{$id}.*"));
 
-		$user->picture = $fileName;
+        // Avatar upload
+        $file = $request->file('file');
+        $fileName = uniqid() . '_' . $id . '.' . $file->getClientOriginalExtension();
+        $file->move($destinationPath, $fileName);
 
-		$user->save();
-	}
+        $user->picture = $fileName;
 
-	public function cv(Request $request)
-	{
-		$id= $request->input('id');
+        $user->save();
+    }
 
-		//PDF upload
-		$pdf = $request->file('pdf');
-		$destinationPath = 'cv/';
-		$fileName = $id . '.pdf';
-		$pdf->move($destinationPath, $fileName);
+    /**
+     * CV upload
+     * @param Request $request
+     */
+    public function cv(Request $request)
+    {
+        $id = $request->input('id');
 
-		//Add it to bdd
-		$user = User::findOrFail($id);
-		$user->cv = $fileName;
-		$user->save();
-	}
+        $pdf = $request->file('pdf');
+        $destinationPath = 'cv/';
+        $fileName = $id . '.pdf';
+
+        array_map('unlink', glob("${destinationPath}*_{$id}.*"));
+
+        $pdf->move($destinationPath, $fileName);
+
+        $user = User::findOrFail($id);
+        $user->cv = $fileName;
+        $user->save();
+    }
 }
-
-?>

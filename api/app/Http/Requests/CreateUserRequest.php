@@ -35,7 +35,7 @@ class CreateUserRequest extends Request
             "password_confirmation" => "required|max:255",
             "country"               => "required|max:70",
             "city"                  => "required|max:70",
-            "postal_code"           => "required|numeric|max:5",
+            "postal_code"           => "required|numeric|max:99999",
             "address_number"        => "required|numeric",
             "address"               => "required|max:70",
         ];
