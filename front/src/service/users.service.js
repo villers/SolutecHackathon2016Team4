@@ -41,8 +41,8 @@ class UsersService {
     return SERVICES.get('$http').get(`${this.apiUrl}/country`);
   }
 
-  upload(params) {
-    return SERVICES.get('$http').post(`${this.apiUrl}/upload`, params);
+  upload(params, headers) {
+    return SERVICES.get('$http').post(`${this.apiUrl}/upload/avatar`, params, headers);
   }
 
   /**

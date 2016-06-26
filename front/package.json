@@ -52,6 +52,7 @@
     "angular-storage": "0.0.15",
     "angular-ui-router": "^0.3.1",
     "highcharts": "^4.2.5",
+    "lf-ng-md-file-input": "^1.4.7",
     "material-design-iconic-font": "^2.2.0",
     "satellizer": "^0.14.1"
   }
