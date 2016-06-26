@@ -2,10 +2,20 @@
   <div layout="column">
     <h1 layout="row" layout-align="center center">Mon compte</h1>
     <md-card id="profile-card">
-      <img ng-src="{{vm.api_url}}/avatar/{{vm.credentialsUpdate.picture }}"
-           title="{{ vm.credentialsUpdate.last_name }} {{ vm.credentialsUpdate.first_name }}"
-           class="md-card-image"
-           alt="{{ vm.credentialsUpdate.last_name }} {{ vm.credentialsUpdate.first_name }}">
+      <div ng-if="vm.credentialsUpdate.picture">
+        <img ng-src="{{vm.api_url}}/avatar/{{vm.credentialsUpdate.picture }}"
+             title="{{ vm.credentialsUpdate.last_name }} {{ vm.credentialsUpdate.first_name }}"
+             class="md-card-image"
+             alt="{{ vm.credentialsUpdate.last_name }} {{ vm.credentialsUpdate.first_name }}">
+      </div>
+
+      <div ng-if="!vm.credentialsUpdate.picture">
+        <img ng-src="http://www.petzoned.com/assets/default_avatar-468e8f42276a2fd234b034f28536570b.png"
+             title="{{ vm.credentialsUpdate.last_name }} {{ vm.credentialsUpdate.first_name }}"
+             class="md-card-image"
+             alt="{{ vm.credentialsUpdate.last_name }} {{ vm.credentialsUpdate.first_name }}">
+      </div>
+
     </md-card>
 
 

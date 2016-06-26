@@ -111,6 +111,10 @@ class Profil {
   sync() {
     SERVICES.get('usersService').me().then((result) => {
       this.credentialsUpdate = result.data;
+
+      if (!this.credentialsUpdate.picture) {
+        this.credentialsUpdate.picture = '';
+      }
     });
 
     SERVICES.get('usersService').country().then(countries => {

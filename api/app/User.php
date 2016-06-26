@@ -35,7 +35,7 @@ class User extends Authenticatable
 
     public function purposes()
     {
-        return $this->hasMany('App\Purpose', 'from_user_id');
+        return $this->hasMany('App\Purpose', 'to_user_id');
     }
 
     public function votes()
