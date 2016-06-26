@@ -11,13 +11,4 @@ class Category extends Model
 
     // The attributes that should be hidden for arrays.
     protected $hidden = [];
-
-    /**
-     * Category belong to Job
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function jobs()
-    {
-        return $this->belongsTo('App\Job');
-    }
 }

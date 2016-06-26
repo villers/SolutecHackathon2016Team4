@@ -19,19 +19,17 @@ class ShopController extends Controller
 
         $premium = $user->premium;
 
-        if($points < 2)
-        {
+        if ($points < 2) {
             $message = "Vous ne dispossez pas d'assez de point";
             return Response::json(compact('message', 'premium'), 200, [], JSON_NUMERIC_CHECK);
         }
 
-        if($premium == 1)
-        {
-           $message = "Vous disposez déjà d'un compte premium";
-           return Response::json(compact('message', 'premium'), 200, [], JSON_NUMERIC_CHECK);
+        if ($premium == 1) {
+            $message = "Vous disposez déjà d'un compte premium";
+            return Response::json(compact('message', 'premium'), 200, [], JSON_NUMERIC_CHECK);
         }
 
-        $user->points = $points -2;
+        $user->points = $points - 2;
 
         $user->premium = 1;
 
@@ -42,10 +40,10 @@ class ShopController extends Controller
         $message = 'Le Cv a été mit en avant !';
 
         return Response::json(compact('message', 'premium'), 200, [], JSON_NUMERIC_CHECK);
-   }
+    }
 
-   public function show()
-   {
+    public function show()
+    {
 
-   }
+    }
 }
