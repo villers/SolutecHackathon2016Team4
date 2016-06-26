@@ -8,7 +8,6 @@ class NetflixHome {
       .set('configService', configService);
 
     this.id = $rootScope.currentUser.id;
-
     this.users = [];
     this.api_url = SERVICES.get('configService').get('API_URL');
 
@@ -24,16 +23,21 @@ class NetflixHome {
           }
         });
 
+        this.selectedId(res.data.users[0].id);
         this.users = res.data.users;
       });
   }
 
+  selectedId(id) {
+    this.selected = id;
+  }
+
   getPdf() {
-    return `${this.api_url}/download?id=${this.id}`;
+    return `${this.api_url}/download?id=${this.selected}`;
   }
 
   getHeight() {
-    return `${window.screen.height - 200}vh`;
+    return `${window.screen.height - document.querySelector('.cv-container')[0].scrollTop}px`;
   }
 }
 

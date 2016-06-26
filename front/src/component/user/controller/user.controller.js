@@ -2,7 +2,7 @@ import angular from 'angular';
 
 const SERVICES = new Map();
 
-class Profil {
+class UserController {
   constructor($state, usersService, $mdToast, configService) {
     SERVICES
       .set('$state', $state)
@@ -88,6 +88,6 @@ class Profil {
   }
 }
 
-Profil.$inject = ['$state', 'usersService', '$mdToast', 'configService'];
+UserController.$inject = ['$state', 'usersService', '$mdToast', 'configService'];
 
-export default Profil;
+export default UserController;
