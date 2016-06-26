@@ -110,7 +110,7 @@
 
           <md-input-container class="full-width">
             <label for="type">Types</label>
-            <md-select id="type" ng-model="vm.credentials.type" aria-label="Types">
+            <md-select id="type" ng-model="vm.credentials.type" aria-label="Types" required>
               <md-option ng-repeat="type in vm.types" value="{{type}}">
                 {{type}}
               </md-option>
@@ -120,7 +120,7 @@
             </div>
           </md-input-container>
 
-          <md-button class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10"  ng-click="vm.register()" ng-disabled="login.$invalid" aria-label="S'inscrire">S'inscrire</md-button>
+          <md-button class="md-raised md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" ng-click="vm.register()" ng-disabled="register.$invalid" aria-label="S'inscrire">S'inscrire</md-button>
           <md-button class="md-primary full-width margin-left-0 margin-right-0 margin-top-10 margin-bottom-10" ui-sref="login" aria-label="Se connecter">Se connecter</md-button>
         </form>
       </md-content>
